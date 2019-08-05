@@ -1,6 +1,7 @@
 package cn.com.dhc.rpmsystem.common;
 
 /**
+ * 常量类
  * @author zss
  * @date 2019-08-05
  */
