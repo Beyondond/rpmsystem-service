@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@MapperScan("cn.com.dhc.rpmsystem.mapper")
+@MapperScan("cn.com.dhc.rpmsystem.*.dao")
 public class RpmsystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(RpmsystemApplication.class, args);
