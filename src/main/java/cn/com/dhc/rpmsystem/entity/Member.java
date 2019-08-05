@@ -1,7 +1,5 @@
 package cn.com.dhc.rpmsystem.entity;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-
 import java.io.Serializable;
 import java.util.Date;
 
