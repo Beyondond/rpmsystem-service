@@ -1,6 +1,7 @@
 package cn.com.dhc.rpmsystem.employe.service.impl;
 
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
+import cn.com.dhc.rpmsystem.entity.Member;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +10,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberServiceImpl implements IMemberService {
+    @Override
+    public Member get(int numUid) {
+        return null;
+    }
 }

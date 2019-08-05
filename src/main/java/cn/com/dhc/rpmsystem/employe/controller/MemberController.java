@@ -3,7 +3,6 @@ package cn.com.dhc.rpmsystem.employe.controller;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.entity.ResultEntity;
-import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +21,7 @@ public class MemberController {
     @RequestMapping("/get/member")
     public ResultEntity<Member> get(@RequestBody Member req) {
 
+        Member member = memberServiceImpl.get(req.getNumUid());
         //return ResultUtils.success(memberServiceImpl.get(req.get));
         return null;
     }
