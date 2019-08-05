@@ -11,7 +11,7 @@
 	        #{operate_content},
 	        #{operate_result},
 	        #{operate_num_uid},
-	        #{operate_time} )
+	        #{operate_time});
     </insert>
 
 </mapper>
