@@ -9,6 +9,9 @@ import cn.com.dhc.rpmsystem.entity.ResultEntity;
  * @date 2019/7/30
  */
 public class ResultUtils {
+
+    private ResultUtils() {}
+
     public static ResultEntity success(Object object) {
         ResultEntity entity = new ResultEntity(Constants.SUCCESS, Constants.VALUES.get(Constants.SUCCESS));
         entity.setData(object);
