@@ -2,6 +2,7 @@ package cn.com.dhc.rpmsystem.employefilter.controller;
 
 import cn.com.dhc.rpmsystem.employefilter.service.EmployeFilterService;
 import cn.com.dhc.rpmsystem.entity.ResultEntity;
+import cn.com.dhc.rpmsystem.utils.OperateLogUtils;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,8 @@ public class EmployeFilterController
 		ResultEntity result = new ResultEntity(1000, "Test Interface", num);
 		
 		LOGGER.info("getEmployes 请求参数：" + request.getParameter("uid"));
+		
+		OperateLogUtils.writeOperateLog(12, "工具类测试", 1, 1441);
 		
 		return JSON.toJSONString(result);
 	}
