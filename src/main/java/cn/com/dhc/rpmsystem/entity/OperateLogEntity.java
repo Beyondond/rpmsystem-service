@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * 操作日志实体对象
+ * @author Sunli
  */
 @Setter
 @Getter

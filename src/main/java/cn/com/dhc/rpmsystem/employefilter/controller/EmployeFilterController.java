@@ -39,7 +39,7 @@ public class EmployeFilterController
 		
 		LOGGER.info("getEmployes 请求参数：" + request.getParameter("uid"));
 		
-		OperateLogUtils.writeOperateLog(12, "工具类测试", 1, 1441);
+		OperateLogUtils.writeOperateLog(12, "工具类测试", true, 1441);
 		
 		return JSON.toJSONString(result);
 	}
