@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "cn.com.dhc.rpmsystem.common.dao.SystemDao">
+
+    <!-- 添加操作日志到数据库中 -->
+    <insert id = "insertOperateLog2DB" parameterType = "cn.com.dhc.rpmsystem.entity.OperateLogEntity">
+        INSERT INTO
+            rpm_operate_log ( skill, operate_content, operate_result, operate_num_uid, operate_time )
+        VALUES (
+            #{skill},
+	        #{operate_content},
+	        #{operate_result},
+	        #{operate_num_uid},
+	        #{operate_time} )
+    </insert>
+
+</mapper>
