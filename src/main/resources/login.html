@@ -1,0 +1,53 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>userList</title>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/layui/layui.js"></script>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    添加用户：<br/>
+    姓名:<input type="text" v-model="userName"/><br/>
+    密码:<input type="text" v-model="password"/><br/>
+    电话:<input type="text" v-model="phone"/><br/>
+    <input type="button" @Click="addUser" value="提交"/>
+        <input type="button" @Click="clearForm" value="提交"/>
+</div>
+
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            userName:"",
+            password:"",
+            phone:""
+        },
+        methods:{
+            addUser:function(){
+                var userDomain = {
+                    userName: this.userName,
+                    password:this.password,
+                    phone:this.phone
+                };
+                $.ajax({
+                    url:"/user/addUser",
+                    type:"post",
+                    contentType:"application/json",
+                    data:JSON.stringify(userDomain),
+                    success:function(data){
+                        myVue.clearForm();
+                    }
+                })
+            },
+            clearForm:function(){
+                this.userName = "";
+                this.password = "";
+                this.phone = "";
+            }
+        }
+    })
+</script>
+</body>
+</html>
