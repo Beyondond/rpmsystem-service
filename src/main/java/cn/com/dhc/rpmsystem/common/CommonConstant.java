@@ -7,6 +7,9 @@ package cn.com.dhc.rpmsystem.common;
 public class CommonConstant  {
 
 
+    /**
+     * 数据状态常量
+     */
     public enum DataStatus implements EnumInterface {
         EXIST(1, "存在"),
         DELETE(0, "删除");
