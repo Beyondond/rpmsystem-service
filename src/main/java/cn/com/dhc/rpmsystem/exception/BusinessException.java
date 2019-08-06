@@ -1,5 +1,6 @@
 package cn.com.dhc.rpmsystem.exception;
 
+import cn.com.dhc.rpmsystem.common.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,13 @@ public class BusinessException extends RuntimeException {
         super();
         this.errorCode = errorCode;
         this.businessMsg = businessMsg;
+        logger.info(this.toString());
+    }
+
+    public BusinessException(ErrorCode errorCode) {
+        super();
+        this.errorCode = errorCode.getCode();
+        this.businessMsg = errorCode.getMsg();
         logger.info(this.toString());
     }
 

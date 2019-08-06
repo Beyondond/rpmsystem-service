@@ -16,8 +16,8 @@
     <result column="init_project_time" jdbcType="DATE" property="initProjectTime" />
     <result column="technology_type" jdbcType="VARCHAR" property="technologyType" />
     <result column="platform_system" jdbcType="VARCHAR" property="platformSystem" />
-    <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
-    <result column="identityId" jdbcType="VARCHAR" property="identityid" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="identityId" jdbcType="VARCHAR" property="identityId" />
     <result column="mailbox" jdbcType="VARCHAR" property="mailbox" />
     <result column="technology_years" jdbcType="VARCHAR" property="technologyYears" />
     <result column="hw_exp" jdbcType="INTEGER" property="hwExp" />
@@ -39,18 +39,18 @@
   </sql>-->
 
   <sql id = "query_where">
-    <if test = "numUid != null and numUid != ''">
-        and num_uid = #{numUid}
+    <if test = "params.numUid != null and params.numUid != ''">
+        and num_uid = #{params.numUid}
     </if>
-    <if test = "status != null and status != ''" >
-        and status = #{status}
+    <if test = "params.status != null and params.status != ''" >
+        and status = #{params.status}
     </if>
   </sql>
 
   <select id="findMember" resultMap="BaseResultMap">
     select * from rpm_member
     <where>
-        <include refid="Column_where"></include>
+        <include refid="query_where"/>
     </where>
   </select>
 
@@ -68,7 +68,7 @@
       #{memLevel,jdbcType=VARCHAR}, #{positon,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR},
       #{engLevel,jdbcType=VARCHAR}, #{graSchool,jdbcType=VARCHAR}, #{graTime,jdbcType=DATE}, 
       #{initPositionTime,jdbcType=DATE}, #{initProjectTime,jdbcType=DATE}, #{technologyType,jdbcType=VARCHAR}, 
-      #{platformSystem,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{identityid,jdbcType=VARCHAR}, 
+      #{platformSystem,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{identityId,jdbcType=VARCHAR},
       #{mailbox,jdbcType=VARCHAR}, #{technologyYears,jdbcType=VARCHAR}, #{hwExp,jdbcType=INTEGER}, 
       #{inputNumUid,jdbcType=INTEGER}, #{inputTime,jdbcType=TIMESTAMP}, #{positionStatus,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, 
@@ -119,10 +119,10 @@
       <if test="platformSystem != null">
         platform_system,
       </if>
-      <if test="phonenum != null">
+      <if test="phoneNum != null">
         phoneNum,
       </if>
-      <if test="identityid != null">
+      <if test="identityId != null">
         identityId,
       </if>
       <if test="mailbox != null">
@@ -202,11 +202,11 @@
       <if test="platformSystem != null">
         #{platformSystem,jdbcType=VARCHAR},
       </if>
-      <if test="phonenum != null">
-        #{phonenum,jdbcType=VARCHAR},
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
       </if>
-      <if test="identityid != null">
-        #{identityid,jdbcType=VARCHAR},
+      <if test="identityId != null">
+        #{identityId,jdbcType=VARCHAR},
       </if>
       <if test="mailbox != null">
         #{mailbox,jdbcType=VARCHAR},

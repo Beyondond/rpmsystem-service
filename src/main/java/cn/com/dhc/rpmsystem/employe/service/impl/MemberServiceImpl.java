@@ -1,6 +1,7 @@
 package cn.com.dhc.rpmsystem.employe.service.impl;
 
 import cn.com.dhc.rpmsystem.common.CommonConstant;
+import cn.com.dhc.rpmsystem.common.ErrorCode;
 import cn.com.dhc.rpmsystem.employe.dao.MemberDao;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
@@ -26,17 +27,23 @@ public class MemberServiceImpl implements IMemberService {
     private MemberDao memberDao;
 
     @Override
-    public Member get(int numUid) throws BusinessException {
+    public Member getMember(int numUid) throws BusinessException {
         try {
             Map<String, Object> params = new HashMap<>(2);
             params.put("numUid", numUid);
             params.put("status", CommonConstant.DataStatus.EXIST.getValue());
 
-            return memberDao.findMember(params);
+            Member member = memberDao.findMember(params);
+            if (null == member) {
+                logger.warn("人员数据不存在");
+                throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
+            }
+
+            return member;
 
         } catch (Exception e) {
-            logger.error("查询人员详情错误！");
-            throw new BusinessException("500", "系统异常");
+            logger.error("查询人员详情错误！", e);
+            throw new BusinessException(ErrorCode.ERROR);
         }
 
     }
