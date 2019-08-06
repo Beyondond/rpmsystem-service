@@ -13,11 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.text.SimpleDateFormat;
 
 /**
  * @author zss
@@ -41,11 +38,9 @@ public class MemberServiceImpl implements IMemberService {
     @Override
     public Member getMember(int numUid) throws BusinessException {
         try {
-            Map<String, Object> params = new HashMap<>(2);
-            params.put("numUid", numUid);
-            params.put("status", CommonConstant.DataStatus.EXIST.getValue());
 
-            Member member = memberDao.findMember(params);
+            Member member = this.commonFindMember(numUid);
+
             if (null == member) {
                 logger.info("人员数据不存在");
                 throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
@@ -70,9 +65,10 @@ public class MemberServiceImpl implements IMemberService {
      *
      * @param req
      * @return
+     * @throws BusinessException
      */
     @Override
-    public Integer saveMember(Member req) {
+    public Integer saveMember(Member req) throws BusinessException {
         try {
 
             req.setStatus(CommonConstant.DataStatus.EXIST.getValue());
@@ -95,16 +91,13 @@ public class MemberServiceImpl implements IMemberService {
      *
      * @param req
      * @return
+     * @throws BusinessException
      */
     @Override
-    public Integer delMember(Member req) {
+    public Integer delMember(Member req) throws BusinessException{
         try {
 
-            Map<String, Object> params = new HashMap<>(2);
-            params.put("numUid", req.getNumUid());
-            params.put("status", CommonConstant.DataStatus.EXIST.getValue());
-
-            Member member = memberDao.findMember(params);
+            Member member = this.commonFindMember(req.getNumUid());
             if (null == member) {
                 logger.info("人员数据不存在");
                 throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
@@ -124,6 +117,52 @@ public class MemberServiceImpl implements IMemberService {
         } finally {
             OperateLogUtils.writeOperateLog(5, "删除用户", true, req.getNumUid());
         }
+    }
+
+    /**
+     * 编辑员工
+     *
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    @Override
+    public Integer updateMember(Member req) throws BusinessException {
+        try {
+
+            Member member = this.commonFindMember(req.getNumUid());
+            if (null == member) {
+                logger.info("人员数据不存在");
+                throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
+            }
+
+            req.setStatus(CommonConstant.DataStatus.EXIST.getValue());
+            memberDao.updateMemberByKey(req);
+
+        } catch (BusinessException e) {
+            logger.error("BusinessException异常:{}", e);
+            throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
+        } catch (Exception e) {
+            logger.error("编辑员工系统异常！", e);
+            throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            OperateLogUtils.writeOperateLog(5, "编辑用户", true, req.getNumUid());
+        }
+        return null;
+    }
+
+    /**
+     * 封装公共根据员工卡号查询员工方法
+     * @param numUid
+     * @return
+     * @throws Exception
+     */
+    private Member commonFindMember(Integer numUid) throws Exception {
+        Map<String, Object> params = new HashMap<>(2);
+        params.put("numUid", numUid);
+        params.put("status", CommonConstant.DataStatus.EXIST.getValue());
+
+        return memberDao.findMember(params);
     }
 
 }

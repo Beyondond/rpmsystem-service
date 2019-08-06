@@ -21,13 +21,23 @@ public interface IMemberService {
      * 添加员工
      * @param req
      * @return
+     * @throws BusinessException
      */
-    Integer saveMember(Member req);
+    Integer saveMember(Member req) throws BusinessException;
 
     /**
      * 根据员工卡号删除员工
      * @param req
      * @return
+     * @throws BusinessException
      */
-    Integer delMember(Member req);
+    Integer delMember(Member req) throws BusinessException;
+
+    /**
+     * 编辑员工
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    Integer updateMember(Member req) throws BusinessException;
 }

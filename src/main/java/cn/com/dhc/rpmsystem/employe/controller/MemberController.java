@@ -49,4 +49,12 @@ public class MemberController {
         return JSON.toJSONString(ResultUtils.success(numUid));
     }
 
+
+    @ApiOperation(value = "编辑员工接口", notes = "编辑员工接口")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateMember(@RequestBody Member req) {
+        Integer numUid = memberServiceImpl.updateMember(req);
+        return JSON.toJSONString(ResultUtils.success(numUid));
+    }
+
 }
