@@ -27,7 +27,7 @@ import java.util.List;
  * 雇员过滤控制层
  */
 @RestController
-@RequestMapping("/EmployeFilter")
+@RequestMapping(value = "/EmployeFilter", produces="application/json; charset=utf-8")
 public class EmployeFilterController
 {
 	// 日志记录器

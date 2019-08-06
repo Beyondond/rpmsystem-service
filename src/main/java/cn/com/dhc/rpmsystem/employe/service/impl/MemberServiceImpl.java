@@ -7,7 +7,7 @@ import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.utils.DateUtils;
-import cn.com.dhc.rpmsystem.utils.OperateLogUtils;
+import cn.com.dhc.rpmsystem.utils.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("查询人员详情异常:{}", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
-            OperateLogUtils.writeOperateLog(2, "查询用户id为" + numUid +"的用户详情", true, numUid);
+            SystemUtils.writeOperateLog(2, "查询用户id为" + numUid +"的用户详情", true, numUid);
         }
 
     }
@@ -81,7 +81,7 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("添加员工系统异常！", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
-            OperateLogUtils.writeOperateLog(5, "添加用户", true, req.getNumUid());
+            SystemUtils.writeOperateLog(5, "添加用户", true, req.getNumUid());
         }
 
     }
@@ -115,7 +115,7 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("删除员工系统异常！", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
-            OperateLogUtils.writeOperateLog(5, "删除用户", true, req.getNumUid());
+            SystemUtils.writeOperateLog(5, "删除用户", true, req.getNumUid());
         }
     }
 
@@ -146,7 +146,7 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("编辑员工系统异常！", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
-            OperateLogUtils.writeOperateLog(5, "编辑用户", true, req.getNumUid());
+            SystemUtils.writeOperateLog(5, "编辑用户", true, req.getNumUid());
         }
         return null;
     }

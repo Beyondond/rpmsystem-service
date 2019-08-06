@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Sunli
  */
 @Component
-public class OperateLogUtils
+public class SystemUtils
 {
 	//设置日期格式
 	private static SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -21,15 +21,15 @@ public class OperateLogUtils
 	@Resource
 	private SystemDao systemDao;
 	
-	private static OperateLogUtils operateLogUtils;
+	private static SystemUtils systemUtils;
 	
 	/**
 	 * 构造方法
 	 */
-	public OperateLogUtils()
+	public SystemUtils()
 	{
-		operateLogUtils = this;
-		operateLogUtils.systemDao = this.systemDao;
+		systemUtils = this;
+		systemUtils.systemDao = this.systemDao;
 	}
 	
 	/**
@@ -51,6 +51,6 @@ public class OperateLogUtils
 		entity.setOperate_time(DF.format(new Date()));					// 操作时间
 		
 		// 将操作日志写入数据库中
-		operateLogUtils.systemDao.insertOperateLog2DB(entity);
+		systemUtils.systemDao.insertOperateLog2DB(entity);
 	}
 }
