@@ -41,6 +41,9 @@ public class MemberServiceImpl implements IMemberService {
 
             return member;
 
+        } catch (BusinessException e) {
+            logger.error("BusinessException异常:{}", e);
+            throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
         } catch (Exception e) {
             logger.error("查询人员详情错误！", e);
             throw new BusinessException(ErrorCode.ERROR);
