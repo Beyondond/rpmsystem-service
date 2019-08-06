@@ -54,6 +54,91 @@
     </where>
   </select>
 
+  <update id="updateMemberByKey" parameterType="cn.com.dhc.rpmsystem.entity.Member">
+    update rpm_member
+    <trim prefix="set" suffixOverrides=",">
+      <if test="memName != null">
+        mem_name = #{memName},
+      </if>
+      <if test="memGender != null">
+        mem_gender = #{memGender},
+      </if>
+      <if test="memLevel != null">
+        mem_level = #{memLevel},
+      </if>
+      <if test="positon != null">
+        positon = #{positon},
+      </if>
+      <if test="education != null">
+        education = #{education},
+      </if>
+      <if test="major != null">
+        major = #{major},
+      </if>
+      <if test="engLevel != null">
+        eng_level = #{engLevel},
+      </if>
+      <if test="graSchool != null">
+        gra_school = #{graSchool},
+      </if>
+      <if test="graTime != null">
+        gra_time = #{graTime},
+      </if>
+      <if test="initPositionTime != null">
+        init_position_time = #{initPositionTime},
+      </if>
+      <if test="initProjectTime != null">
+        init_project_time = #{initProjectTime},
+      </if>
+      <if test="technologyType != null">
+        technology_type = #{technologyType},
+      </if>
+      <if test="platformSystem != null">
+        platform_system = #{platformSystem},
+      </if>
+      <if test="phoneNum != null">
+        phoneNum = #{phoneNum},
+      </if>
+      <if test="identityId != null">
+        identityId = #{identityId},
+      </if>
+      <if test="mailbox != null">
+        mailbox = #{mailbox},
+      </if>
+      <if test="technologyYears != null">
+        technology_years = #{technologyYears},
+      </if>
+      <if test="hwExp != null">
+        hw_exp = #{hwExp},
+      </if>
+      <if test="inputNumUid != null">
+        input_num_uid = #{inputNumUid},
+      </if>
+      <if test="inputTime != null">
+        input_time = #{inputTime},
+      </if>
+      <if test="positionStatus != null">
+        position_status = #{positionStatus},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime},
+      </if>
+      <if test="pastCorp != null">
+        past_corp = #{pastCorp},
+      </if>
+      <if test="projectExp != null">
+        project_exp = #{projectExp},
+      </if>
+    </trim>
+    where num_uid = #{numUid,jdbcType=INTEGER}
+  </update>
+
   <insert id="insert" parameterType="cn.com.dhc.rpmsystem.entity.Member">
     insert into rpm_member (num_uid, mem_name, mem_gender, 
       mem_level, positon, education, major,

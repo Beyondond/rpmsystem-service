@@ -6,14 +6,18 @@ import cn.com.dhc.rpmsystem.employe.dao.MemberDao;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
+import cn.com.dhc.rpmsystem.utils.DateUtils;
 import cn.com.dhc.rpmsystem.utils.OperateLogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.text.SimpleDateFormat;
 
 /**
  * @author zss
@@ -43,7 +47,7 @@ public class MemberServiceImpl implements IMemberService {
 
             Member member = memberDao.findMember(params);
             if (null == member) {
-                logger.warn("人员数据不存在");
+                logger.info("人员数据不存在");
                 throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
             }
 
@@ -53,7 +57,7 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("BusinessException异常:{}", e);
             throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
         } catch (Exception e) {
-            logger.error("查询人员详情错误！", e);
+            logger.error("查询人员详情异常:{}", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
             OperateLogUtils.writeOperateLog(2, "查询用户id为" + numUid +"的用户详情", true, numUid);
@@ -71,6 +75,8 @@ public class MemberServiceImpl implements IMemberService {
     public Integer saveMember(Member req) {
         try {
 
+            req.setStatus(CommonConstant.DataStatus.EXIST.getValue());
+            req.setCreatedTime(DateUtils.getTimestamp());
             memberDao.insertSelective(req);
 
             return req.getNumUid();
@@ -83,4 +89,41 @@ public class MemberServiceImpl implements IMemberService {
         }
 
     }
+
+    /**
+     * 根据员工卡号删除员工
+     *
+     * @param req
+     * @return
+     */
+    @Override
+    public Integer delMember(Member req) {
+        try {
+
+            Map<String, Object> params = new HashMap<>(2);
+            params.put("numUid", req.getNumUid());
+            params.put("status", CommonConstant.DataStatus.EXIST.getValue());
+
+            Member member = memberDao.findMember(params);
+            if (null == member) {
+                logger.info("人员数据不存在");
+                throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
+            }
+
+            req.setStatus(CommonConstant.DataStatus.DELETE.getValue());
+            req.setDeleteTime(DateUtils.getTimestamp());
+            memberDao.updateMemberByKey(req);
+
+            return req.getNumUid();
+        } catch (BusinessException e) {
+            logger.error("BusinessException异常:{}", e);
+            throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
+        } catch (Exception e) {
+            logger.error("删除员工系统异常！", e);
+            throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            OperateLogUtils.writeOperateLog(5, "删除用户", true, req.getNumUid());
+        }
+    }
+
 }

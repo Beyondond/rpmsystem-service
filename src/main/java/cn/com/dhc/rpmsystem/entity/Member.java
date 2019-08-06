@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author zhouyongzhou
@@ -118,11 +119,11 @@ public class Member implements Serializable {
     /**
      * 创建时间
      */
-    private Date createdTime;
+    private Timestamp createdTime;
     /**
      * 删除时间
      */
-    private Date deleteTime;
+    private Timestamp  deleteTime;
 
 
 }

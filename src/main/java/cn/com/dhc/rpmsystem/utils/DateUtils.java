@@ -2,6 +2,7 @@ package cn.com.dhc.rpmsystem.utils;
 
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -345,5 +346,9 @@ public class DateUtils {
         calendar.add(calendar.MONTH, months);  //设置为前几月的时间
         String str = dateToString(calendar.getTime(), DATA_FORMATER); //格式化并返回
         return str.toString();
+    }
+
+    public static Timestamp getTimestamp() {
+        return Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     }
 }

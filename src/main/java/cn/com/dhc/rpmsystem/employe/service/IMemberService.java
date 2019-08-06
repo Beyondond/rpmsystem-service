@@ -23,4 +23,11 @@ public interface IMemberService {
      * @return
      */
     Integer saveMember(Member req);
+
+    /**
+     * 根据员工卡号删除员工
+     * @param req
+     * @return
+     */
+    Integer delMember(Member req);
 }

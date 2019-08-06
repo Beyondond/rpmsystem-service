@@ -41,4 +41,12 @@ public class MemberController {
         return JSON.toJSONString(ResultUtils.success(numUid));
     }
 
+
+    @ApiOperation(value = "删除员工接口", notes = "根据员工卡号删除员工接口")
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    public String delMember(@RequestBody Member req) {
+        Integer numUid = memberServiceImpl.delMember(req);
+        return JSON.toJSONString(ResultUtils.success(numUid));
+    }
+
 }

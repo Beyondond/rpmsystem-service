@@ -27,4 +27,11 @@ public interface MemberDao {
      * @return
      */
     void insertSelective(Member req) throws Exception;
+
+    /**
+     * 根据员工卡号删除员工
+     * @param req
+     * @throws Exception
+     */
+    void updateMemberByKey(Member req) throws Exception;
 }
