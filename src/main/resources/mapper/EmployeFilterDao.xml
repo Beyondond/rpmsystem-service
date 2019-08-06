@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.com.dhc.rpmsystem.employefilter.dao.EmployeFilterDao">
-    <select id = "getTestNum" resultType = "int">
+
+    <select id = "getEmploysByFilter" parameterType="cn.com.dhc.rpmsystem.employefilter.dto.EmployeFilterDto" resultType = "cn.com.dhc.rpmsystem.entity.Member">
         SELECT
-            count(1)
+            num_uid AS numUid,
+            mem_name AS memName,
+            mem_gender AS memGender,
+            mem_level AS memLevel,
+            positon AS positon,
+            education AS education,
+            major AS major,
+            eng_level AS engLevel,
+            gra_school AS graSchool,
+            gra_time AS graTime,
+            init_position_time AS initPositionTime,
+            init_project_time AS initProjectTime,
+            technology_type AS technologyType,
+            platform_system AS platformSystem,
+            phoneNum AS phoneNum,
+            identityId AS identityId,
+            mailbox AS mailbox,
+            technology_years AS technologyYears,
+            hw_exp AS hwExp,
+            past_corp AS pastCrop,
+            project_exp AS projectExp,
+            input_num_uid AS inputNumUid,
+            input_time AS inputTime,
+            position_status AS positionStatus,
+            status AS status,
+            created_time AS createdTime,
+            delete_time AS deleteTime
         FROM
-            rpm_role
+            rpm_member
         WHERE
-            1 = 1;
+            1 = 1
+
+        <!-- 数据为有效数据，即在职雇员 -->
+        AND status = 1
+
+        <!-- 未入项 -->
+        <if test = "searchType == 1">
+            AND ( init_project_time IS NULL OR trim( init_project_time ) = '' )
+        </if>
+
+        <!-- 已入项 -->
+        <if test = "searchType == 0">
+            AND trim( init_project_time ) != ''
+        </if>
+
+        <!-- 根据雇员名字过滤 -->
+        <if test = "searchName != null and searchName != ''.toString()">
+            AND mem_name like '%${searchName}%'
+        </if>
+
+        <!-- 根据雇员工号过滤 -->
+        <if test = "searchUid != null and searchUid != ''.toString()">
+            AND num_uid like '%${searchUid}%'
+        </if>
+
+        <!-- 根据雇员职位过滤 -->
+        <if test = "searchPosition != null and searchPosition != ''.toString()">
+            AND position like '%${searchPosition}%'
+        </if>
     </select>
+
 </mapper>
