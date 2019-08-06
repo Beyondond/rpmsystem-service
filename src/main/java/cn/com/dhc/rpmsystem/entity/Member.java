@@ -94,7 +94,7 @@ public class Member implements Serializable {
     /**
      * 过往公司
      */
-    private String pastCrop;
+    private String pastCorp;
     /**
      * 项目经验
      */

@@ -6,6 +6,7 @@ import cn.com.dhc.rpmsystem.employe.dao.MemberDao;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
+import cn.com.dhc.rpmsystem.utils.OperateLogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,8 @@ public class MemberServiceImpl implements IMemberService {
         } catch (Exception e) {
             logger.error("查询人员详情错误！", e);
             throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            OperateLogUtils.writeOperateLog(2, "查询用户id" + numUid +"的用户详情", true, numUid);
         }
 
     }
