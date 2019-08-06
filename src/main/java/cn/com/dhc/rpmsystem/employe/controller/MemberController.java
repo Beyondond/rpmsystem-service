@@ -2,7 +2,6 @@ package cn.com.dhc.rpmsystem.employe.controller;
 
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
-import cn.com.dhc.rpmsystem.entity.ResultEntity;
 import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
