@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhc.rpmsystem.employe.dao.MemberDao">
+  <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.entity.Member">
+    <result column="num_uid" jdbcType="INTEGER" property="numUid" />
+    <result column="mem_name" jdbcType="VARCHAR" property="memName" />
+    <result column="mem_gender" jdbcType="INTEGER" property="memGender" />
+    <result column="mem_level" jdbcType="VARCHAR" property="memLevel" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="eng_level" jdbcType="VARCHAR" property="engLevel" />
+    <result column="gra_school" jdbcType="VARCHAR" property="graSchool" />
+    <result column="gra_time" jdbcType="DATE" property="graTime" />
+    <result column="init_position_time" jdbcType="DATE" property="initPositionTime" />
+    <result column="init_project_time" jdbcType="DATE" property="initProjectTime" />
+    <result column="technology_type" jdbcType="VARCHAR" property="technologyType" />
+    <result column="platform_system" jdbcType="VARCHAR" property="platformSystem" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phonenum" />
+    <result column="identityId" jdbcType="VARCHAR" property="identityid" />
+    <result column="mailbox" jdbcType="VARCHAR" property="mailbox" />
+    <result column="technology_years" jdbcType="VARCHAR" property="technologyYears" />
+    <result column="hw_exp" jdbcType="INTEGER" property="hwExp" />
+    <result column="past_corp" jdbcType="LONGVARCHAR" property="pastCorp" />
+    <result column="project_exp" jdbcType="LONGVARCHAR" property="projectExp" />
+    <result column="input_num_uid" jdbcType="INTEGER" property="inputNumUid" />
+    <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
+    <result column="position_status" jdbcType="INTEGER" property="positionStatus" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+  </resultMap>
+  <!--<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.com.dhc.rpmsystem.employe.model.MemberWithBLOBs">
+    <result column="past_corp" jdbcType="LONGVARCHAR" property="pastCorp" />
+    <result column="project_exp" jdbcType="LONGVARCHAR" property="projectExp" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    past_corp, project_exp
+  </sql>-->
+  <insert id="insert" parameterType="cn.com.dhc.rpmsystem.entity.Member">
+    insert into rpm_member (num_uid, mem_name, mem_gender, 
+      mem_level, education, major, 
+      eng_level, gra_school, gra_time, 
+      init_position_time, init_project_time, technology_type, 
+      platform_system, phoneNum, identityId, 
+      mailbox, technology_years, hw_exp, 
+      input_num_uid, input_time, position_status, 
+      status, created_time, delete_time, 
+      past_corp, project_exp)
+    values (#{numUid,jdbcType=INTEGER}, #{memName,jdbcType=VARCHAR}, #{memGender,jdbcType=INTEGER}, 
+      #{memLevel,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{engLevel,jdbcType=VARCHAR}, #{graSchool,jdbcType=VARCHAR}, #{graTime,jdbcType=DATE}, 
+      #{initPositionTime,jdbcType=DATE}, #{initProjectTime,jdbcType=DATE}, #{technologyType,jdbcType=VARCHAR}, 
+      #{platformSystem,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{identityid,jdbcType=VARCHAR}, 
+      #{mailbox,jdbcType=VARCHAR}, #{technologyYears,jdbcType=VARCHAR}, #{hwExp,jdbcType=INTEGER}, 
+      #{inputNumUid,jdbcType=INTEGER}, #{inputTime,jdbcType=TIMESTAMP}, #{positionStatus,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, 
+      #{pastCorp,jdbcType=LONGVARCHAR}, #{projectExp,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhc.rpmsystem.entity.Member">
+    insert into rpm_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="numUid != null">
+        num_uid,
+      </if>
+      <if test="memName != null">
+        mem_name,
+      </if>
+      <if test="memGender != null">
+        mem_gender,
+      </if>
+      <if test="memLevel != null">
+        mem_level,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="engLevel != null">
+        eng_level,
+      </if>
+      <if test="graSchool != null">
+        gra_school,
+      </if>
+      <if test="graTime != null">
+        gra_time,
+      </if>
+      <if test="initPositionTime != null">
+        init_position_time,
+      </if>
+      <if test="initProjectTime != null">
+        init_project_time,
+      </if>
+      <if test="technologyType != null">
+        technology_type,
+      </if>
+      <if test="platformSystem != null">
+        platform_system,
+      </if>
+      <if test="phonenum != null">
+        phoneNum,
+      </if>
+      <if test="identityid != null">
+        identityId,
+      </if>
+      <if test="mailbox != null">
+        mailbox,
+      </if>
+      <if test="technologyYears != null">
+        technology_years,
+      </if>
+      <if test="hwExp != null">
+        hw_exp,
+      </if>
+      <if test="inputNumUid != null">
+        input_num_uid,
+      </if>
+      <if test="inputTime != null">
+        input_time,
+      </if>
+      <if test="positionStatus != null">
+        position_status,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+      <if test="pastCorp != null">
+        past_corp,
+      </if>
+      <if test="projectExp != null">
+        project_exp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="numUid != null">
+        #{numUid,jdbcType=INTEGER},
+      </if>
+      <if test="memName != null">
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="memGender != null">
+        #{memGender,jdbcType=INTEGER},
+      </if>
+      <if test="memLevel != null">
+        #{memLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="engLevel != null">
+        #{engLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="graSchool != null">
+        #{graSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="graTime != null">
+        #{graTime,jdbcType=DATE},
+      </if>
+      <if test="initPositionTime != null">
+        #{initPositionTime,jdbcType=DATE},
+      </if>
+      <if test="initProjectTime != null">
+        #{initProjectTime,jdbcType=DATE},
+      </if>
+      <if test="technologyType != null">
+        #{technologyType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformSystem != null">
+        #{platformSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null">
+        #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbox != null">
+        #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyYears != null">
+        #{technologyYears,jdbcType=VARCHAR},
+      </if>
+      <if test="hwExp != null">
+        #{hwExp,jdbcType=INTEGER},
+      </if>
+      <if test="inputNumUid != null">
+        #{inputNumUid,jdbcType=INTEGER},
+      </if>
+      <if test="inputTime != null">
+        #{inputTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionStatus != null">
+        #{positionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pastCorp != null">
+        #{pastCorp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="projectExp != null">
+        #{projectExp,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
