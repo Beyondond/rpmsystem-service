@@ -139,6 +139,7 @@ public class MemberServiceImpl implements IMemberService {
             req.setStatus(CommonConstant.DataStatus.EXIST.getValue());
             memberDao.updateMemberByKey(req);
 
+            return req.getNumUid();
         } catch (BusinessException e) {
             logger.error("BusinessException异常:{}", e);
             throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
@@ -148,7 +149,6 @@ public class MemberServiceImpl implements IMemberService {
         } finally {
             SystemUtils.writeOperateLog(5, "编辑用户", true, req.getNumUid());
         }
-        return null;
     }
 
     /**
