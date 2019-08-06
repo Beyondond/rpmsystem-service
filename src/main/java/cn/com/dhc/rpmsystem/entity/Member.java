@@ -32,6 +32,10 @@ public class Member implements Serializable {
      */
     private String memLevel;
     /**
+     * 职位
+     */
+    private String positon;
+    /**
      * 学历
      */
     private String education;

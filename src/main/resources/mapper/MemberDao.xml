@@ -6,6 +6,7 @@
     <result column="mem_name" jdbcType="VARCHAR" property="memName" />
     <result column="mem_gender" jdbcType="INTEGER" property="memGender" />
     <result column="mem_level" jdbcType="VARCHAR" property="memLevel" />
+    <result column="positon" jdbcType="VARCHAR" property="positon" />
     <result column="education" jdbcType="VARCHAR" property="education" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="eng_level" jdbcType="VARCHAR" property="engLevel" />
@@ -36,9 +37,26 @@
   <sql id="Blob_Column_List">
     past_corp, project_exp
   </sql>-->
+
+  <sql id = "query_where">
+    <if test = "numUid != null and numUid != ''">
+        and num_uid = #{numUid}
+    </if>
+    <if test = "status != null and status != ''" >
+        and status = #{status}
+    </if>
+  </sql>
+
+  <select id="findMember" resultMap="BaseResultMap">
+    select * from rpm_member
+    <where>
+        <include refid="Column_where"></include>
+    </where>
+  </select>
+
   <insert id="insert" parameterType="cn.com.dhc.rpmsystem.entity.Member">
     insert into rpm_member (num_uid, mem_name, mem_gender, 
-      mem_level, education, major, 
+      mem_level, positon, education, major,
       eng_level, gra_school, gra_time, 
       init_position_time, init_project_time, technology_type, 
       platform_system, phoneNum, identityId, 
@@ -47,7 +65,7 @@
       status, created_time, delete_time, 
       past_corp, project_exp)
     values (#{numUid,jdbcType=INTEGER}, #{memName,jdbcType=VARCHAR}, #{memGender,jdbcType=INTEGER}, 
-      #{memLevel,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{memLevel,jdbcType=VARCHAR}, #{positon,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR},
       #{engLevel,jdbcType=VARCHAR}, #{graSchool,jdbcType=VARCHAR}, #{graTime,jdbcType=DATE}, 
       #{initPositionTime,jdbcType=DATE}, #{initProjectTime,jdbcType=DATE}, #{technologyType,jdbcType=VARCHAR}, 
       #{platformSystem,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{identityid,jdbcType=VARCHAR}, 
@@ -70,6 +88,9 @@
       </if>
       <if test="memLevel != null">
         mem_level,
+      </if>
+      <if test="positon != null">
+        positon,
       </if>
       <if test="education != null">
         education,
@@ -150,6 +171,9 @@
       </if>
       <if test="memLevel != null">
         #{memLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="positon != null">
+        #{positon,jdbcType=VARCHAR},
       </if>
       <if test="education != null">
         #{education,jdbcType=VARCHAR},
