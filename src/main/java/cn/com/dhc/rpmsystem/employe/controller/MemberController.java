@@ -33,6 +33,12 @@ public class MemberController {
         return JSON.toJSONString(ResultUtils.success(member));
     }
 
-    //pub
+
+    @ApiOperation(value = "添加员工接口", notes = "添加员工接口")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveMember(@RequestBody Member req) {
+        Integer numUid = memberServiceImpl.saveMember(req);
+        return JSON.toJSONString(ResultUtils.success(numUid));
+    }
 
 }

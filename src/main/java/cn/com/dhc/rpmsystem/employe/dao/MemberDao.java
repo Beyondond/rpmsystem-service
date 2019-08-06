@@ -12,5 +12,19 @@ import java.util.Map;
  */
 @Repository
 public interface MemberDao {
+
+    /**
+     * 根据员工卡号获取详情
+     * @param params
+     * @return
+     * @throws Exception
+     */
     Member findMember(@Param("params") Map<String, Object> params) throws Exception;
+
+    /**
+     * 新增员工
+     * @param req
+     * @return
+     */
+    void insertSelective(Member req) throws Exception;
 }

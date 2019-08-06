@@ -27,6 +27,13 @@ public class MemberServiceImpl implements IMemberService {
     @Autowired
     private MemberDao memberDao;
 
+
+    /**
+     * 根据员工卡号查询员工详情
+     * @param numUid
+     * @return
+     * @throws BusinessException
+     */
     @Override
     public Member getMember(int numUid) throws BusinessException {
         try {
@@ -49,7 +56,30 @@ public class MemberServiceImpl implements IMemberService {
             logger.error("查询人员详情错误！", e);
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
-            OperateLogUtils.writeOperateLog(2, "查询用户id" + numUid +"的用户详情", true, numUid);
+            OperateLogUtils.writeOperateLog(2, "查询用户id为" + numUid +"的用户详情", true, numUid);
+        }
+
+    }
+
+    /**
+     * 添加员工
+     *
+     * @param req
+     * @return
+     */
+    @Override
+    public Integer saveMember(Member req) {
+        try {
+
+            memberDao.insertSelective(req);
+
+            return req.getNumUid();
+
+        } catch (Exception e) {
+            logger.error("添加员工系统异常！", e);
+            throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            OperateLogUtils.writeOperateLog(5, "添加用户", true, req.getNumUid());
         }
 
     }
