@@ -169,7 +169,8 @@
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.spring.boot.springbootdemo.mapper" level="debug"/>
+        <logger name="cn.com.dhc.rpmsystem.employe.dao" level="debug"/>
+        <logger name="cn.com.dhc.rpmsystem.common.dao" level="debug"/>
     </springProfile>
 
     <root level="info">
