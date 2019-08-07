@@ -34,5 +34,30 @@ public class CommonConstant  {
         }
     }
 
+    /**
+     * 员工首页展示项是否启用
+     */
+    public enum EnableSetting implements EnumInterface {
+        ENABLE(1, "启用"),
+        NOT_ENABLE(2, "未启用");
+
+        Integer value;
+        String desc;
+
+        EnableSetting(Integer value, String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        @Override
+        public Integer getValue() {
+            return value;
+        }
+
+        @Override
+        public String getDesc() {
+            return desc;
+        }
+    }
 
 }
