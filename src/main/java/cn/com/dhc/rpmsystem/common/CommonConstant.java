@@ -35,7 +35,7 @@ public class CommonConstant  {
     }
 
     /**
-     * 员工首页展示项是否启用
+     * setting是否启用
      */
     public enum EnableSetting implements EnumInterface {
         ENABLE(1, "启用"),
