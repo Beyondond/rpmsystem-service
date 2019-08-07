@@ -1,7 +1,9 @@
 package cn.com.dhc.rpmsystem.employe.controller;
 
+import cn.com.dhc.rpmsystem.employe.dto.MemberDto;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
+import cn.com.dhc.rpmsystem.entity.PageBean;
 import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
@@ -54,6 +56,14 @@ public class MemberController {
     public String updateMember(@RequestBody Member req) {
         Integer numUid = memberServiceImpl.updateMember(req);
         return JSON.toJSONString(ResultUtils.success(numUid));
+    }
+
+
+    @ApiOperation(value = "员工分页(支持检索 字段排序)接口", notes = "员工分页(支持检索 字段排序)接口")
+    @RequestMapping(value = "/page-list", method = RequestMethod.POST)
+    public String pageMemberList(@RequestBody MemberDto req) {
+        PageBean<Member> page = memberServiceImpl.pageMemberList(req);
+        return JSON.toJSONString(ResultUtils.success(page));
     }
 
 }

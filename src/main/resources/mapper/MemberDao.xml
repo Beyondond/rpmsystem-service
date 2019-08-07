@@ -40,10 +40,13 @@
 
   <sql id = "query_where">
     <if test = "params.numUid != null and params.numUid != ''">
-        and num_uid = #{params.numUid}
+     and num_uid = #{params.numUid}
     </if>
     <if test = "params.status != null and params.status != ''" >
-        and status = #{params.status}
+     and status = #{params.status}
+    </if>
+    <if test= "params.searchName != null and params.searchName != ''">
+     and mem_name like CONCAT('%',CONCAT(#{params.searchName, jdbcType=VARCHAR},'%'))
     </if>
   </sql>
 
@@ -52,6 +55,24 @@
     <where>
         <include refid="query_where"/>
     </where>
+  </select>
+
+  <select id="selectMemberListTotal" resultType="java.lang.Integer">
+    select count(*) from rpm_member
+    <where>
+      <include refid="query_where"/>
+    </where>
+  </select>
+
+  <select id="selectMemberList" resultMap="BaseResultMap">
+    select * from rpm_member
+    <where>
+      <include refid="query_where"/>
+    </where>
+    <if test="null != order">
+      order by <![CDATA[ ${order.orderField} ${order.orderType} ]]>
+    </if>
+    limit #{currIndex} , #{pageSize}
   </select>
 
   <update id="updateMemberByKey" parameterType="cn.com.dhc.rpmsystem.entity.Member">

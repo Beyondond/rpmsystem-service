@@ -3,17 +3,22 @@ package cn.com.dhc.rpmsystem.employe.service.impl;
 import cn.com.dhc.rpmsystem.common.CommonConstant;
 import cn.com.dhc.rpmsystem.common.ErrorCode;
 import cn.com.dhc.rpmsystem.employe.dao.MemberDao;
+import cn.com.dhc.rpmsystem.employe.dto.MemberDto;
 import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
+import cn.com.dhc.rpmsystem.entity.Order;
+import cn.com.dhc.rpmsystem.entity.PageBean;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.utils.DateUtils;
 import cn.com.dhc.rpmsystem.utils.SystemUtils;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +29,9 @@ import java.util.Map;
 public class MemberServiceImpl implements IMemberService {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+
+    private static final int DEFAULT_PAGE_SIZE = 10;
+    private static final int DEFAULT_CURRENTPAGE = 0;
 
     @Autowired
     private MemberDao memberDao;
@@ -148,6 +156,56 @@ public class MemberServiceImpl implements IMemberService {
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
             SystemUtils.writeOperateLog(5, "编辑用户", true, req.getNumUid());
+        }
+    }
+
+    /**
+     * 员工分页(支持姓名检索 字段排序)查询
+     *
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    @Override
+    public PageBean<Member> pageMemberList(MemberDto req) throws BusinessException {
+        try {
+
+            Map<String, Object> params = new HashMap<>(2);
+            params.put("status", CommonConstant.DataStatus.EXIST.getValue());
+            params.put("searchName", req.getSearchName());
+
+            //查询总条数
+            Integer total = memberDao.selectMemberListTotal(params);
+            logger.debug("根据条件查询总记录数total:{}", total);
+
+            Integer currIndex = DEFAULT_CURRENTPAGE;
+            Integer pageSize = DEFAULT_PAGE_SIZE;
+            if (null != req.getCurrPage() && null != req.getPageSize()) {
+                currIndex = req.getCurrPage() <=1 ? 0 : (req.getCurrPage() - 1) * req.getPageSize();
+                pageSize = req.getPageSize();
+            }
+            Order order;
+            if (null == req.getOrder()) {
+                order = new Order("num_uid");
+            } else {
+                order = req.getOrder();
+            }
+
+            //查询当前页数据
+            List<Member> list = memberDao.selectMemberList(params, order, currIndex, pageSize);
+            logger.info("员工列表查询list:{}", JSON.toJSONString(list));
+
+            PageBean<Member> result = new PageBean<>();
+            result.setTotalCount(total);
+            result.setLimit(pageSize);
+            result.setList(list);
+
+            return result;
+        } catch (Exception e) {
+            logger.error("员工列表查询系统异常！", e);
+            throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            SystemUtils.writeOperateLog(5, "用户列表查询", true, 0);
         }
     }
 

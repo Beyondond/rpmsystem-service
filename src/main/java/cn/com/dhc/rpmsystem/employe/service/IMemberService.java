@@ -1,6 +1,8 @@
 package cn.com.dhc.rpmsystem.employe.service;
 
+import cn.com.dhc.rpmsystem.employe.dto.MemberDto;
 import cn.com.dhc.rpmsystem.entity.Member;
+import cn.com.dhc.rpmsystem.entity.PageBean;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
 
 /**
@@ -40,4 +42,12 @@ public interface IMemberService {
      * @throws BusinessException
      */
     Integer updateMember(Member req) throws BusinessException;
+
+    /**
+     * 员工分页(支持姓名检索 字段排序)查询
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    PageBean<Member> pageMemberList(MemberDto req) throws BusinessException;
 }
