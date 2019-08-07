@@ -18,19 +18,19 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成实体类的包名和位置 ，targetPackage指的是包名,targetProject值得是路径位置-->
-        <javaModelGenerator targetPackage="cn.com.dhc.rpmsystem.employe.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="cn.com.dhc.rpmsystem.setting.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="cn.com.dhc.rpmsystem.employe.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="cn.com.dhc.rpmsystem.setting.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.com.dhc.rpmsystem.employe.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.com.dhc.rpmsystem.setting.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="rpm_member" domainObjectName="Member" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="rpm_setting" domainObjectName="Setting" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

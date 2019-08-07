@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhc.rpmsystem.setting.dao.SettingDao">
+  <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.setting.entity.Setting">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="setting_name" jdbcType="VARCHAR" property="settingName" />
+    <result column="skill" jdbcType="LONGVARCHAR" property="skill" />
+    <result column="setting_value" jdbcType="VARCHAR" property="settingValue" />
+    <result column="enable_status" jdbcType="INTEGER" property="enableStatus" />
+  </resultMap>
+
+  <insert id="insert" parameterType="cn.com.dhc.rpmsystem.setting.entity.Setting">
+    insert into rpm_setting (id, setting_name, setting_value, 
+      enable_status, skill)
+    values (#{id,jdbcType=BIGINT}, #{settingName,jdbcType=VARCHAR}, #{settingValue,jdbcType=VARCHAR}, 
+      #{enableStatus,jdbcType=INTEGER}, #{skill,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhc.rpmsystem.setting.entity.Setting">
+    insert into rpm_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="settingName != null">
+        setting_name,
+      </if>
+      <if test="settingValue != null">
+        setting_value,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+      <if test="skill != null">
+        skill,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="settingName != null">
+        #{settingName,jdbcType=VARCHAR},
+      </if>
+      <if test="settingValue != null">
+        #{settingValue,jdbcType=VARCHAR},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
