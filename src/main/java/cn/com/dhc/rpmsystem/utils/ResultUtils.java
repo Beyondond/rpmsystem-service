@@ -18,7 +18,7 @@ public class ResultUtils {
         return entity;
     }
 
-    public static ResultEntity succcess() {
+    public static ResultEntity success() {
         ResultEntity entity = new ResultEntity(Constants.SUCCESS, Constants.VALUES.get(Constants.SUCCESS));
         return entity;
     }
@@ -37,5 +37,6 @@ public class ResultUtils {
         ResultEntity entity = new ResultEntity(Constants.FAILURE, message);
         return entity;
     }
+
 
 }

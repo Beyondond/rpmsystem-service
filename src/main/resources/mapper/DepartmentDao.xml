@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhc.rpmsystem.system.dao.DepartmentDao">
+
+
+    <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.system.entity.Department">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dp_name" jdbcType="VARCHAR" property="dp_name"/>
+        <result column="paternal_id" jdbcType="INTEGER" property="paternal_id"/>
+        <result column="created_num_uid" jdbcType="INTEGER" property="created_num_uid"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="created_time"/>
+    </resultMap>
+
+    <!-- 添加部门到数据库中 -->
+    <insert id="addDepartment" parameterType="cn.com.dhc.rpmsystem.system.entity.Department">
+        INSERT INTO
+            rpm_department (dp_name, paternal_id, created_num_uid,created_time)
+        VALUES (
+            #{dp_name},
+	        #{paternal_id},
+	        #{created_num_uid},
+	        #{created_time});
+    </insert>
+    <!--删除一个部门-->
+    <delete id="deleteDepartment" parameterType="integer">
+        delete from rpm_department
+        where id = #{id}
+    </delete>
+    <!--根据相应条件查找-->
+    <select id="findAllDepartment" resultType="cn.com.dhc.rpmsystem.system.entity.Department">
+        SELECT
+            id,
+            dp_name,
+            paternal_id,
+            created_num_uid,
+            created_time
+        FROM
+            rpm_department
+
+    </select>
+
+</mapper>
