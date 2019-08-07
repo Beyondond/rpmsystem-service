@@ -64,4 +64,41 @@
         </if>
     </select>
 
+    <select id="getLoginUserInfo" resultType="cn.com.dhc.rpmsystem.entity.UserEntity">
+        SELECT
+            num_uid As numUid,
+            mem_name As memName,
+            role_ids As roleIds
+        FROM
+            rpm_member_role
+        WHERE
+            num_uid = #{userName}
+            AND PASSWORD = #{password};
+    </select>
+
+    <select id="getSkillsListByRoles" resultType="string">
+        SELECT
+            skills
+        FROM
+            rpm_role
+        WHERE
+            id IN
+            <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+    </select>
+
+    <select id="getMenuEntityList" resultType="cn.com.dhc.rpmsystem.entity.MenuEntity">
+        SELECT
+            id AS id,
+            parent_id AS parentId,
+            skill_desc AS skillDesc
+        FROM
+            rpm_skill_info
+        WHERE
+            id IN
+            <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+    </select>
 </mapper>

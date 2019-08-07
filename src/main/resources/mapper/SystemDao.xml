@@ -14,4 +14,17 @@
 	        #{operate_time});
     </insert>
 
+    <!-- 通过配置Id获取配置详情 -->
+    <select id="getRpmSettingById" resultType="cn.com.dhc.rpmsystem.entity.SettingEntity">
+        SELECT
+            id AS id,
+            setting_Name AS settingName,
+            skill AS skill,
+            setting_value AS settingValue,
+            enable_status AS enableStatus
+        FROM
+            rpm_setting
+        WHERE
+            id = ${id};
+    </select>
 </mapper>

@@ -4,7 +4,10 @@ import cn.com.dhc.rpmsystem.common.Constants;
 import cn.com.dhc.rpmsystem.employefilter.dto.EmployeFilterDto;
 import cn.com.dhc.rpmsystem.employefilter.service.EmployeFilterService;
 import cn.com.dhc.rpmsystem.entity.Member;
+import cn.com.dhc.rpmsystem.entity.MenuEntity;
 import cn.com.dhc.rpmsystem.entity.ResultEntity;
+import cn.com.dhc.rpmsystem.entity.UserEntity;
+import cn.com.dhc.rpmsystem.utils.SystemUtils;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -184,5 +187,43 @@ public class EmployeFilterController
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 用户登陆系统
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(HttpServletRequest request)
+	{
+		LOGGER.info("Controller login Start!");
+		
+		// 返回对象
+		ResultEntity result = null;
+		
+		String userName = request.getParameter("userName");
+		
+		String password = request.getParameter("password");
+		
+		UserEntity userEntity = employeFilterService.getLoginUserInfo(userName, password);
+		
+		if (null == userEntity)
+		{
+			// 如果通过用户名和密码获取到的用户信息为空，则说明用户名或密码错误
+			result = new ResultEntity(Constants.FAILURE, "Username or password is incorrect!");
+		}
+		else
+		{
+			// 获取该用户的所有menu列表
+			List<MenuEntity> menuResource = employeFilterService.getUserMenuEntityList(userEntity.getRoleIds());
+			
+			// 设置该用户的所有menu资源信息
+			userEntity.setMenuResource(menuResource);
+			
+			result = new ResultEntity(Constants.SUCCESS, StringUtils.EMPTY, userEntity);
+		}
+		
+		LOGGER.info("Controller login End!");
+		return JSON.toJSONString(result);
 	}
 }

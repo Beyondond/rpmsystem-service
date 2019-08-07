@@ -2,6 +2,8 @@ package cn.com.dhc.rpmsystem.utils;
 
 import cn.com.dhc.rpmsystem.common.dao.SystemDao;
 import cn.com.dhc.rpmsystem.entity.OperateLogEntity;
+import cn.com.dhc.rpmsystem.entity.SettingEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -52,5 +54,34 @@ public class SystemUtils
 		
 		// 将操作日志写入数据库中
 		systemUtils.systemDao.insertOperateLog2DB(entity);
+	}
+	
+	/**
+	 * 通过配置id获取配置内容
+	 * @param id
+	 * @return
+	 */
+	public static String getRpmSettingValueById(int id)
+	{
+		String result = StringUtils.EMPTY;
+		
+		SettingEntity entity = getRpmSettingById(id);
+		
+		if (null != entity)
+		{
+			result = entity.getSettingValue();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 通过配置id获取配置对象
+	 * @param id
+	 * @return
+	 */
+	public static SettingEntity getRpmSettingById(int id)
+	{
+		return systemUtils.systemDao.getRpmSettingById(id);
 	}
 }

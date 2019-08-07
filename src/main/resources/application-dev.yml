@@ -1,6 +1,8 @@
 server:
   port: 8080
   include: swagger
+  servlet:
+    context-path: /api
 
 spring:
   datasource:
