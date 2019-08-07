@@ -5,9 +5,9 @@ import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 import java.util.List;
 
 /**
- * @author zhouyongzhou
+ * @author kemeiyi
  * @description 角色配置管理
- * @date 2019/8/6
+ * @date 2019/8/7
  */
 public interface RoleManagerService {
 
@@ -20,11 +20,20 @@ public interface RoleManagerService {
 
 
     /**
-     * 根据角色名称删除
-     * @param name
+     * 根据角色工号删除
+     * @param id
      * @return
      */
-    int deleteRoleByName(String name);
+    int deleteRoleByName(int id);
+
+
+    /**
+     *修改角色
+     * @param id
+     * @return
+     */
+    Boolean updateRpmRole(int id);
+
 
     /**
      * 查询所有的角色
@@ -37,7 +46,5 @@ public interface RoleManagerService {
      * @param name
      * @return
      */
-    List<RpmRole> findRoleByName(String name);
-
-
+    RpmRole findRoleByName(String name);
 }
