@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.com.dhc.rpmsystem.employefilter.dao.EmployeFilterDao">
 
+    <!-- 根据检索信息获取已入项/未入项信息 -->
     <select id = "getEmploysByFilter" parameterType="cn.com.dhc.rpmsystem.employefilter.dto.EmployeFilterDto" resultType = "cn.com.dhc.rpmsystem.entity.Member">
         SELECT
             num_uid AS numUid,
@@ -64,6 +65,7 @@
         </if>
     </select>
 
+    <!-- 根据用户名和密码获取人员信息 -->
     <select id="getLoginUserInfo" resultType="cn.com.dhc.rpmsystem.entity.UserEntity">
         SELECT
             num_uid As numUid,
@@ -73,9 +75,10 @@
             rpm_member_role
         WHERE
             num_uid = #{userName}
-            AND PASSWORD = #{password};
+            AND password = #{password};
     </select>
 
+    <!-- 根据角色获取所有的技能列表 -->
     <select id="getSkillsListByRoles" resultType="string">
         SELECT
             skills
@@ -88,6 +91,7 @@
             </foreach>
     </select>
 
+    <!-- 根据技能Id获取所有的Menu列表 -->
     <select id="getMenuEntityList" resultType="cn.com.dhc.rpmsystem.entity.MenuEntity">
         SELECT
             id AS id,
