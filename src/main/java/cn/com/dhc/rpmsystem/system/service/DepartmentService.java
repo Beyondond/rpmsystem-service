@@ -14,15 +14,11 @@ public interface DepartmentService {
     int addDepartment(Department department);
 
     /**
-     * 查询所有的部门
+     *根据条件查询
      * @return
      */
-    List<Department> findAllDepartment();
+    List<Department> findDepartments(String searchStr);
 
-    /**
-     * 根据部门名称查询(支持模糊查询)
-     */
-    List<Department> findDepartmentByName(String name);
 
     /**
      * 删除一个部门

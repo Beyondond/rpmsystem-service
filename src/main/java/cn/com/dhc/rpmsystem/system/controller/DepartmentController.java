@@ -6,6 +6,7 @@ import cn.com.dhc.rpmsystem.system.service.impl.DepartmentServiceImpl;
 import cn.com.dhc.rpmsystem.utils.DateUtils;
 import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import cn.com.dhc.rpmsystem.utils.SystemUtils;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,16 @@ public class DepartmentController {
     @PostMapping("/addDepartment")
     public ResultEntity addDepartment(@RequestParam("dp_name") String dp_name, @RequestParam("paternal_id") int paternal_id,
                                       @RequestParam("created_num_uid") int created_num_uid, @RequestParam("created_time") String created_time) {
-        Department department = new Department();
-        department.setDp_name( dp_name );
-        department.setPaternal_id( paternal_id );
-        department.setCreated_num_uid( created_num_uid );
-        Date date = DateUtils.StringToDate( created_time, null );
-        department.setCreated_time( date );
+        Department department = getDepartment( -1, dp_name, paternal_id, created_num_uid, created_time );
         departmentService.addDepartment( department );
         SystemUtils.writeOperateLog( 1, "添加了" + dp_name, true, created_num_uid );
         return ResultUtils.success();
     }
 
-    @ApiOperation("查询所有部门")
-    @GetMapping("/findAllDepartment")
-    public ResultEntity findAllDepartment() {
-        return ResultUtils.success( departmentService.findAllDepartment() );
+    @ApiOperation("根据条件查询")
+    @PostMapping("/findDepartments")
+    public ResultEntity findDepartments(@RequestParam("searchStr") String searchStr) {
+        return ResultUtils.success( departmentService.findDepartments( searchStr ) );
     }
 
     @ApiOperation("根据id删除部门")
@@ -51,6 +47,37 @@ public class DepartmentController {
     public ResultEntity deleteDepartment(@RequestParam("id") int id) {
         departmentService.deleteDepartment( id );
         return ResultUtils.success();
+    }
+
+    @ApiOperation("编辑更新部门")
+    @PostMapping("/updateDepartment")
+    public String updateDepartment(@RequestParam("id") int id, @RequestParam("dp_name") String dp_name, @RequestParam("paternal_id") int paternal_id,
+                                   @RequestParam("created_num_uid") int created_num_uid, @RequestParam("created_time") String created_time) {
+        Department department = getDepartment( id, dp_name, paternal_id, created_num_uid, created_time );
+        return JSON.toJSONString( ResultUtils.success(  departmentService.updateDepartment( department ) ) );
+    }
+
+    /**
+     * 获取Department
+     *
+     * @param id
+     * @param dp_name
+     * @param paternal_id
+     * @param created_num_uid
+     * @param created_time
+     * @return
+     */
+    public Department getDepartment(int id, String dp_name, int paternal_id, int created_num_uid, String created_time) {
+        Department department = new Department();
+        if (-1 != id) {
+            department.setId( id );
+        }
+        department.setDp_name( dp_name );
+        department.setPaternal_id( paternal_id );
+        department.setCreated_num_uid( created_num_uid );
+        Date date = DateUtils.StringToDate( created_time, null );
+        department.setCreated_time( date );
+        return department;
     }
 
 

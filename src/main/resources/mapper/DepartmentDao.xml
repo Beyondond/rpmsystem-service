@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.dhc.rpmsystem.system.dao.DepartmentDao">
 
-
     <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.system.entity.Department">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="dp_name" jdbcType="VARCHAR" property="dp_name"/>
@@ -21,13 +20,28 @@
 	        #{created_num_uid},
 	        #{created_time});
     </insert>
+
+    <!--编辑更新-->
+    <update id="updateDepartment" parameterType="cn.com.dhc.rpmsystem.system.entity.Department">
+        UPDATE rpm_department
+        SET
+        dp_name = #{dp_name},
+        paternal_id = #{paternal_id},
+        created_num_uid =#{created_num_uid},
+        created_time=#{created_time}
+        WHERE
+            id = #{id};
+    </update>
+
     <!--删除一个部门-->
     <delete id="deleteDepartment" parameterType="integer">
         delete from rpm_department
         where id = #{id}
     </delete>
+
+
     <!--根据相应条件查找-->
-    <select id="findAllDepartment" resultType="cn.com.dhc.rpmsystem.system.entity.Department">
+    <select id="findDepartments" resultType="cn.com.dhc.rpmsystem.system.entity.Department">
         SELECT
             id,
             dp_name,
@@ -36,7 +50,11 @@
             created_time
         FROM
             rpm_department
-
+        where
+          1 = 1
+          <if test="null !=#{searchStr} and searchStr != ''.toString()">
+             AND dp_name like '%${searchStr}%'
+          </if>
     </select>
 
 </mapper>

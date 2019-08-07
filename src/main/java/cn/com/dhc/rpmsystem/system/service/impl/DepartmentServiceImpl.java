@@ -24,23 +24,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> findAllDepartment() {
-        return departmentDao.findAllDepartment();
+    public List<Department> findDepartments(String searchStr) {
+        return departmentDao.findDepartments( searchStr );
     }
 
-    @Override
-    public List<Department> findDepartmentByName(String name) {
-        return null;
-    }
 
     @Override
     public int deleteDepartment(int id) {
         return departmentDao.deleteDepartment( id );
     }
 
-
     @Override
     public int updateDepartment(Department department) {
-        return 0;
+        return departmentDao.updateDepartment( department );
     }
+
+
 }

@@ -16,10 +16,10 @@ public interface DepartmentDao {
 
     /**
      * 查询
+     * @param searchStr
      * @return
      */
-    List<Department> findAllDepartment();
-
+    List<Department> findDepartments(String searchStr);
 
     /**
      *删除一个部门
@@ -28,4 +28,10 @@ public interface DepartmentDao {
      */
     int deleteDepartment(int id);
 
+    /**
+     * 编辑更新
+     * @param department
+     * @return
+     */
+    int updateDepartment(Department department);
 }
