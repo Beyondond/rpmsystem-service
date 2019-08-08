@@ -23,7 +23,7 @@ public class ColumnShowDto implements Serializable {
     /**
      * 要展示的列
      */
-    private List<String> columnShow;
+    private List<Integer> columnShow;
 
     @Getter
     @Setter

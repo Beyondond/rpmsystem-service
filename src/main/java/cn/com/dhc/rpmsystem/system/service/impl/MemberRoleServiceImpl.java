@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -53,9 +54,9 @@ public class MemberRoleServiceImpl implements IMemberRoleService {
             String cs = rpmMemberRole.getColumnShow();
             if (!StringUtils.isEmpty(cs)) {
                 final String[] csArr = cs.split(",");
-                List<String> columnShowList = new ArrayList<>(Arrays.asList(csArr));
+                List<Integer> csIds = Arrays.asList(csArr).stream().map(a -> Integer.valueOf(a)).collect(Collectors.toList());
 
-                result.setColumnShow(columnShowList);
+                result.setColumnShow(csIds);
             }
 
             List<ColumnShowDto.Inside> columnAll = new ArrayList<>();
