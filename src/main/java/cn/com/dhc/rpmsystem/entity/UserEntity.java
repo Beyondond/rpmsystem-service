@@ -12,11 +12,15 @@ import java.util.List;
 @Data
 public class UserEntity
 {
+	// 用户账号Id
 	private String numUid;
 	
+	// 用户名称
 	private String memName;
 	
+	// 用户角色
 	private String roleIds;
 	
+	// 用户菜单资源
 	private List<MenuEntity> menuResource;
 }

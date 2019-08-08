@@ -82,7 +82,7 @@ public class EmployeFilterServiceImpl implements EmployeFilterService
 		// 根据角色列表获取所有的技能列表
 		List<String> strSkillList = employeFilterDao.getSkillsListByRoles(roleList);
 		
-		List<String> skillsList = new ArrayList<String>();
+		List<String> skillsList = new ArrayList<>();
 		
 		for (String strSkill : strSkillList)
 		{
