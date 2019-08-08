@@ -46,6 +46,7 @@ public class DepartmentController {
     @PostMapping("/deleteDepartment")
     public ResultEntity deleteDepartment(@RequestParam("id") int id) {
         departmentService.deleteDepartment( id );
+        SystemUtils.writeOperateLog( 2, "根据id删除部门" + id, true, 20034 );
         return ResultUtils.success();
     }
 
@@ -54,7 +55,8 @@ public class DepartmentController {
     public String updateDepartment(@RequestParam("id") int id, @RequestParam("dp_name") String dp_name, @RequestParam("paternal_id") int paternal_id,
                                    @RequestParam("created_num_uid") int created_num_uid, @RequestParam("created_time") String created_time) {
         Department department = getDepartment( id, dp_name, paternal_id, created_num_uid, created_time );
-        return JSON.toJSONString( ResultUtils.success(  departmentService.updateDepartment( department ) ) );
+        SystemUtils.writeOperateLog( 3, "编辑更新部门" + dp_name, true, 20034 );
+        return JSON.toJSONString( ResultUtils.success( departmentService.updateDepartment( department ) ) );
     }
 
     /**
