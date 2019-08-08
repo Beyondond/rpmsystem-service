@@ -19,4 +19,11 @@ public interface SystemDao
 	 * @return
 	 */
 	SettingEntity getRpmSettingById(@Param("id") int id);
+	
+	/**
+	 * 根据技能Id获取功能描述
+	 * @param skillId
+	 * @return
+	 */
+	String getSkillDescBySkillId(@Param("skillId") Integer skillId);
 }

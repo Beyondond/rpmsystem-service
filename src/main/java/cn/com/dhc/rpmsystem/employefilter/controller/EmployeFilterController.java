@@ -7,7 +7,6 @@ import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.entity.MenuEntity;
 import cn.com.dhc.rpmsystem.entity.ResultEntity;
 import cn.com.dhc.rpmsystem.entity.UserEntity;
-import cn.com.dhc.rpmsystem.utils.SystemUtils;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -56,13 +55,13 @@ public class EmployeFilterController
 		ResultEntity result = null;
 		
 		// 检索类型 0：已入项 1：未入项
-		Integer searchType = Integer.parseInt(request.getParameter("searchType"));
+		Integer searchType = Integer.parseInt(StringUtils.isEmpty(request.getParameter("searchType")) ? "0" : request.getParameter("searchType"));
 		
 		// 过滤内容
 		String searchValue = request.getParameter("searchValue");
 		
 		// 过滤种类
-		Integer searchKind = Integer.parseInt(request.getParameter("searchKind"));
+		Integer searchKind = Integer.parseInt(StringUtils.isEmpty(request.getParameter("searchKind")) ? "0" : request.getParameter("searchKind"));
 		
 		// 过滤信息收集
 		EmployeFilterDto searchDto = buildEmployeFilterDto(searchKind, searchValue, searchType);

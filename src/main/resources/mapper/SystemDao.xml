@@ -27,4 +27,14 @@
         WHERE
             id = ${id};
     </select>
+
+    <!-- 根据技能Id获取功能描述 -->
+    <select id="getSkillDescBySkillId" resultType="java.lang.String">
+        SELECT
+            skill_desc
+        FROM
+            rpm_skill_info
+        WHERE
+            id = #{skillId};
+    </select>
 </mapper>

@@ -46,7 +46,7 @@ public class SystemUtils
 		// 操作日志实体对象
 		OperateLogEntity entity = new OperateLogEntity();
 		
-		entity.setSkill(skill);											// 技能Id
+		entity.setSkill(getSkillDescBySkillId(skill));					// 技能Id
 		entity.setOperate_content(content);								// 操作内容
 		entity.setOperate_result(true == result ? 1 : 0);				// 操作结果
 		entity.setOperate_num_uid(uid);									// 操作人Id
@@ -83,5 +83,18 @@ public class SystemUtils
 	public static SettingEntity getRpmSettingById(int id)
 	{
 		return systemUtils.systemDao.getRpmSettingById(id);
+	}
+	
+	/**
+	 * 根据技能Id获取功能描述
+	 * @param skill
+	 * @return
+	 */
+	public static String getSkillDescBySkillId(Integer skill)
+	{
+		// 根据技能Id获取功能描述
+		String desc = systemUtils.systemDao.getSkillDescBySkillId(skill);
+		
+		return StringUtils.isBlank(desc) ? StringUtils.EMPTY : desc;
 	}
 }

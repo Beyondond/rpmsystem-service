@@ -32,5 +32,4 @@ public class OperateLogEntity {
     /**
      * 操作人名字
      */
-    private String mem_name;
-}
+    private String mem_name;}
