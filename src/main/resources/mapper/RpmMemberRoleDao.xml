@@ -10,6 +10,12 @@
     <result column="created_num_uid" jdbcType="INTEGER" property="createdNumUid" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
   </resultMap>
+
+  <select id="findMemberRole" parameterType="integer" resultMap="BaseResultMap">
+    select * from rpm_member_role
+    where num_uid = #{numUid}
+  </select>
+
   <insert id="insert" parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
     insert into rpm_member_role (num_uid, mem_name, role_ids, 
       password, column_show, created_num_uid, 
