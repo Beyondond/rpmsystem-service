@@ -88,12 +88,12 @@ public class RoleManagerServiceImpl implements RoleManagerService {
 
     /**
      *查询某个角色
-     * @param name
+     * @param roleName
      * @return  RpmRole
      */
     @Override
-    public RpmRole findRoleByName(String name) {
-        RpmRole rpmRole = roleManagerDao.findOneRpmRole(name);
+    public RpmRole findRoleByName(String roleName) {
+        RpmRole rpmRole = roleManagerDao.findOneRpmRole(roleName);
         if (rpmRole != null){
             LOGGER.debug("查询到角色");
         }else{

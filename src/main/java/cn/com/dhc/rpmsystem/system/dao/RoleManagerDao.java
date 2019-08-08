@@ -40,11 +40,11 @@ public interface RoleManagerDao {
 
     /**
      * 查询单个角色（根据角色名称查询）
-     * @param name
+     * @param roleName
      * @return
      */
 
-    RpmRole findOneRpmRole(String name);
+    RpmRole findOneRpmRole(String roleName);
 
 
     /**

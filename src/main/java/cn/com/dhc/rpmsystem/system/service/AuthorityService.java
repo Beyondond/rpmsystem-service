@@ -27,7 +27,6 @@ public interface AuthorityService {
      */
     Integer deleteSkillInfo(int id);
 
-
     /**
      *修改权限
      * @param id
@@ -37,12 +36,11 @@ public interface AuthorityService {
 
     /**
      * 查询单个权限（根据id名称查询）
-     * @param name
+     * @param id
      * @return
      */
 
-    RpmSkillInfo findOneSkillInfo(String name);
-
+    RpmSkillInfo findOneSkillInfo(int id);
 
     /**
      * 查询所有权限

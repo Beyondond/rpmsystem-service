@@ -55,8 +55,8 @@ public class RoleManagerController {
 
     @ApiOperation("查询单个角色")
     @PostMapping("/findRoleByName")
-    public ResultEntity findRoleByName(@RequestParam("name")String name){
-        RpmRole rpmRole = roleManagerService.findRoleByName(name);
+    public ResultEntity findRoleByName(@RequestParam("roleName")String roleName){
+        RpmRole rpmRole = roleManagerService.findRoleByName(roleName);
         return ResultUtils.success(rpmRole);
     }
 

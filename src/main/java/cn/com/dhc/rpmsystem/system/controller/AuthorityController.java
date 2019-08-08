@@ -53,8 +53,8 @@ public class AuthorityController {
 
     @ApiOperation("查询单个权限")
     @PostMapping("/findAuthorityByName")
-    public ResultEntity findAuthorityByName(@RequestParam("name")String name){
-        RpmSkillInfo rpmSkillInfo = authorityService.findOneSkillInfo(name);
+    public ResultEntity findAuthorityByName(@RequestParam("id")int id){
+        RpmSkillInfo rpmSkillInfo = authorityService.findOneSkillInfo(id);
         return ResultUtils.success(rpmSkillInfo);
     }
 

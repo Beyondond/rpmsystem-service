@@ -40,12 +40,12 @@ public interface AuthorityDao {
     Boolean updateSkillInfo(int id);
 
     /**
-     * 查询单个权限（根据id名称查询）
-     * @param name
+     * 查询单个权限（根据name名称查询）
+     * @param id
      * @return
      */
 
-    RpmSkillInfo findOneSkillInfo(String name);
+    RpmSkillInfo findOneSkillInfo(int id);
 
 
     /**

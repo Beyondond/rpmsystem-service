@@ -43,8 +43,8 @@ public interface RoleManagerService {
 
     /**
      * 根据角色名称查询
-     * @param name
+     * @param roleName
      * @return
      */
-    RpmRole findRoleByName(String name);
+    RpmRole findRoleByName(String roleName);
 }

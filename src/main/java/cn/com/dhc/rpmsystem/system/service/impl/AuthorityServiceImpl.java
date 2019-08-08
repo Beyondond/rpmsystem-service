@@ -79,13 +79,13 @@ public class AuthorityServiceImpl implements AuthorityService{
 
     /**
      *查询某个权限
-     * @param name
+     * @param id
      * @return  RpmSkillInfo
      */
     @Override
-    public RpmSkillInfo findOneSkillInfo(String name) {
+    public RpmSkillInfo findOneSkillInfo(int id) {
 
-        RpmSkillInfo rpmSkillInfo= authorityDao.findOneSkillInfo(name);
+        RpmSkillInfo rpmSkillInfo= authorityDao.findOneSkillInfo(id);
         if (rpmSkillInfo != null){
             LOGGER.debug("查询到权限");
         }else{
