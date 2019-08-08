@@ -55,7 +55,7 @@ public class Member implements Serializable {
     /**
      * 毕业时间
      */
-    private String graTime;
+    private Date graTime;
     /**
      * 入职时间
      */
