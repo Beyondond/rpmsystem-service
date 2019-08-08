@@ -33,7 +33,7 @@ public class MemberRoleServiceImpl implements IMemberRoleService {
     private RpmMemberRoleDao rpmMemberRoleDao;
 
     /**
-     * 获取员工首页列展示
+     * 获取员工首页设置列展示
      *
      * @param numUid
      * @return

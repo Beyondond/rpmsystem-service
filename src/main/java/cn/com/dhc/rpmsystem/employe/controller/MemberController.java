@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author zss
  * @date 2019-08-05
@@ -64,6 +66,14 @@ public class MemberController {
     public String pageMemberList(@RequestBody MemberDto req) {
         PageBean<Member> page = memberServiceImpl.pageMemberList(req);
         return JSON.toJSONString(ResultUtils.success(page));
+    }
+
+
+    @ApiOperation(value = "员工首页列表展示列接口", notes = "员工首页列表展示列接口")
+    @RequestMapping(value = "/get/column-show", method = RequestMethod.POST)
+    public String getMemberColumnShow(@RequestBody Member req) {
+        Map<String, Integer> result = memberServiceImpl.getMemberColumnShow(req);
+        return JSON.toJSONString(ResultUtils.success(result));
     }
 
 }

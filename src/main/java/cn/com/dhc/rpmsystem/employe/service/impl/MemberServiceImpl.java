@@ -8,8 +8,9 @@ import cn.com.dhc.rpmsystem.employe.service.IMemberService;
 import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.entity.Order;
 import cn.com.dhc.rpmsystem.entity.PageBean;
-import cn.com.dhc.rpmsystem.entity.ReqPage;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
+import cn.com.dhc.rpmsystem.system.dao.RpmMemberRoleDao;
+import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.utils.DateUtils;
 import cn.com.dhc.rpmsystem.utils.SystemUtils;
 import com.alibaba.fastjson.JSON;
@@ -18,9 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author zss
@@ -37,6 +40,8 @@ public class MemberServiceImpl implements IMemberService {
     @Autowired
     private MemberDao memberDao;
 
+    @Autowired
+    private RpmMemberRoleDao rpmMemberRoleDao;
 
     /**
      * 根据员工卡号查询员工详情
@@ -207,6 +212,43 @@ public class MemberServiceImpl implements IMemberService {
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
             SystemUtils.writeOperateLog(5, "用户列表查询", true, 0);
+        }
+    }
+
+    /**
+     * 员工首页列表展示列
+     *
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    @Override
+    public Map<String, Integer> getMemberColumnShow(Member req) throws BusinessException {
+        try {
+
+            RpmMemberRole memberRole = rpmMemberRoleDao.findMemberRole(req.getNumUid());
+
+            if (null == memberRole) {
+                logger.info("数据不存在");
+                throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
+            }
+
+            final List<Integer> list = Arrays.asList(memberRole.getColumnShow().split(",")).stream().map(a -> Integer.valueOf(a)).collect(Collectors.toList());
+
+            Map<String, Integer> result = new HashMap<>();
+
+            Arrays.asList(CommonConstant.ColumnShow.values()).stream().forEach( element -> {
+               Integer value = list.contains(element.getValue()) ? 1 : 0;
+               result.put(element.name(), value);
+            });
+
+            return result;
+        } catch (BusinessException e) {
+            logger.error("BusinessException异常:{}", e);
+            throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
+        } catch (Exception e) {
+            logger.error("查询人员详情异常:{}", e);
+            throw new BusinessException(ErrorCode.ERROR);
         }
     }
 

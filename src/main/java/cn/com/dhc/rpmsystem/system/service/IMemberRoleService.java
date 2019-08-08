@@ -20,7 +20,7 @@ public interface IMemberRoleService {
     ColumnShowDto getMemberRole(int numUid) throws BusinessException;
 
     /**
-     * 设置员工首页列展示
+     * 设置员工首页设置列展示
      * @param req
      * @throws BusinessException
      */

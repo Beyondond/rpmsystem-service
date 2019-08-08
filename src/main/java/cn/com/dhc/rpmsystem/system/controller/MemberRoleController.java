@@ -27,7 +27,7 @@ public class MemberRoleController {
     private IMemberRoleService memberRoleServiceImpl;
 
 
-    @ApiOperation(value = "获取员工首页列展示接口", notes = "获取员工首页列展示接口")
+    @ApiOperation(value = "获取员工首页设置列展示接口", notes = "获取员工首页设置列展示接口")
     @RequestMapping(value = "/get/column-show", method = RequestMethod.POST)
     public String getMemberRole(@RequestBody ColumnShowSetUpDto req) {
 

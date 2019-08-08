@@ -6,6 +6,8 @@ import cn.com.dhc.rpmsystem.entity.PageBean;
 import cn.com.dhc.rpmsystem.entity.ReqPage;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
 
+import java.util.Map;
+
 /**
  * @author zss
  * @date 2019-08-05
@@ -51,4 +53,12 @@ public interface IMemberService {
      * @throws BusinessException
      */
     PageBean<Member> pageMemberList(MemberDto req) throws BusinessException;
+
+    /**
+     * 员工首页列表展示列
+     * @param req
+     * @return
+     * @throws BusinessException
+     */
+    Map<String, Integer> getMemberColumnShow(Member req) throws BusinessException;
 }

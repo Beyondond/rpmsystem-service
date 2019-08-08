@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface RpmMemberRoleDao {
 
     /**
-     * 获查询员工首页列展示
+     * 获查询员工角色关联信息
      * @param numUid
      * @return
      * @throws Exception
