@@ -20,7 +20,7 @@ import java.util.Map;
  * @author zss
  * @date 2019-08-05
  */
-@Api(value = "员工接口")
+@Api(tags = "员工接口")
 @RestController
 @RequestMapping("/member")
 public class MemberController {

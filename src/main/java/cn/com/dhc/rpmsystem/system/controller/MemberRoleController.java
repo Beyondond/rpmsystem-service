@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zss
  * @date 2019-08-08
  */
-@Api(value = "员工角色接口类")
+@Api(tags = "员工角色接口")
 @RestController
 @RequestMapping("/member/role")
 public class MemberRoleController {
