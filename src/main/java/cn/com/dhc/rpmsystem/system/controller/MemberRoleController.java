@@ -5,6 +5,7 @@ import cn.com.dhc.rpmsystem.system.dto.ColumnShowSetUpDto;
 import cn.com.dhc.rpmsystem.system.service.IMemberRoleService;
 import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zss
  * @date 2019-08-08
  */
+@Api(value = "员工角色接口类")
 @RestController
 @RequestMapping("/member/role")
 public class MemberRoleController {
