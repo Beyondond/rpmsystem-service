@@ -9,6 +9,7 @@ import cn.com.dhc.rpmsystem.system.dto.ColumnShowSetUpDto;
 import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.service.IMemberRoleService;
 import cn.com.dhc.rpmsystem.utils.SystemUtils;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,8 +98,19 @@ public class MemberRoleServiceImpl implements IMemberRoleService {
             }
 
             StringBuilder sb = new StringBuilder();
-            //req.getColumnShow().stream().
+            req.getColumnShow().stream().forEach( element -> sb.append(element).append(","));
+            String cs = sb.deleteCharAt(sb.length() - 1).toString();
+            logger.info("存入员工展示列的标识columnShow：{}", JSON.toJSON(sb));
 
+            RpmMemberRole rpmMemberRole1 = new RpmMemberRole();
+            rpmMemberRole1.setNumUid(req.getNumUid());
+            rpmMemberRole1.setColumnShow(cs);
+
+            rpmMemberRoleDao.updateRpmMemberRole(rpmMemberRole1);
+
+        } catch (BusinessException e) {
+            logger.error("BusinessException异常:{}", e);
+            throw new BusinessException(e.getErrorCode(), e.getBusinessMsg());
         } catch (Exception e) {
             logger.error("设置员工首页列展示异常:{}", e);
             throw new BusinessException(ErrorCode.ERROR);

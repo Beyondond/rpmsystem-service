@@ -13,4 +13,11 @@ public interface RpmMemberRoleDao {
      * @throws Exception
      */
     RpmMemberRole findMemberRole(int numUid) throws Exception;
+
+    /**
+     * 更新员工首页列展示
+     * @param rpmMemberRole1
+     * @throws Exception
+     */
+    void updateRpmMemberRole(RpmMemberRole rpmMemberRole1) throws Exception;
 }

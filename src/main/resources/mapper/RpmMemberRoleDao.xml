@@ -16,6 +16,31 @@
     where num_uid = #{numUid}
   </select>
 
+  <update id="updateRpmMemberRole" parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+    update rpm_member_role
+    <trim prefix="set" suffixOverrides=",">
+      <if test="memName != null">
+        mem_name = #{memName},
+      </if>
+      <if test="roleIds != null">
+        role_ids = #{roleIds},
+      </if>
+      <if test="password != null">
+        password = #{password},
+      </if>
+      <if test="columnShow != null">
+        column_show = #{columnShow},
+      </if>
+      <if test="createdNumUid != null">
+        created_num_uid = #{createdNumUid},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime},
+      </if>
+    </trim>
+    where num_uid = #{numUid,jdbcType=INTEGER}
+  </update>
+
   <insert id="insert" parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
     insert into rpm_member_role (num_uid, mem_name, role_ids, 
       password, column_show, created_num_uid, 

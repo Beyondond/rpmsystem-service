@@ -171,6 +171,7 @@
     <springProfile name="dev">
         <logger name="cn.com.dhc.rpmsystem.employe.dao" level="debug"/>
         <logger name="cn.com.dhc.rpmsystem.common.dao" level="debug"/>
+        <logger name="cn.com.dhc.rpmsystem.system.dao" level="debug"/>
     </springProfile>
 
     <root level="info">

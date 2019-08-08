@@ -20,5 +20,5 @@ public class ColumnShowSetUpDto implements Serializable {
      */
     private Integer numUid;
 
-    private List<String> columnShow;
+    private List<Integer> columnShow;
 }
