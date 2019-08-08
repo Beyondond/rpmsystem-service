@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zss
@@ -19,10 +18,20 @@ public class ColumnShowDto implements Serializable {
     /**
      * 全部列
      */
-    private Map<Integer, String> columnAll;
+    private List<Inside> columnAll;
 
     /**
      * 要展示的列
      */
     private List<String> columnShow;
+
+    @Getter
+    @Setter
+    public class Inside {
+
+        private Integer id;
+
+        private String name;
+
+    }
 }

@@ -5,6 +5,7 @@ import cn.com.dhc.rpmsystem.common.ErrorCode;
 import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.system.dao.RpmMemberRoleDao;
 import cn.com.dhc.rpmsystem.system.dto.ColumnShowDto;
+import cn.com.dhc.rpmsystem.system.dto.ColumnShowSetUpDto;
 import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.service.IMemberRoleService;
 import cn.com.dhc.rpmsystem.utils.SystemUtils;
@@ -55,12 +56,16 @@ public class MemberRoleServiceImpl implements IMemberRoleService {
 
                 result.setColumnShow(columnShowList);
             }
-            Map<Integer,String> columnAllMap = new HashMap<>();
+
+            List<ColumnShowDto.Inside> columnAll = new ArrayList<>();
             Arrays.asList(CommonConstant.ColumnShow.values()).stream().forEach( element -> {
-                columnAllMap.put(element.getValue(), element.getDesc());
+                ColumnShowDto.Inside inside = new ColumnShowDto().new Inside();
+                inside.setId(element.getValue());
+                inside.setName(element.getDesc());
+                columnAll.add(inside);
             });
 
-            result.setColumnAll(columnAllMap);
+            result.setColumnAll(columnAll);
 
             return result;
         } catch (BusinessException e) {
@@ -71,6 +76,34 @@ public class MemberRoleServiceImpl implements IMemberRoleService {
             throw new BusinessException(ErrorCode.ERROR);
         } finally {
             SystemUtils.writeOperateLog(2, "查询用户id为" + numUid +"的员工首页列展示", true, numUid);
+        }
+    }
+
+    /**
+     * 设置员工首页列展示
+     *
+     * @param req
+     * @throws BusinessException
+     */
+    @Override
+    public void setMemberRole(ColumnShowSetUpDto req) throws BusinessException {
+        try {
+
+            RpmMemberRole rpmMemberRole = rpmMemberRoleDao.findMemberRole(req.getNumUid());
+
+            if (null == rpmMemberRole) {
+                logger.info("数据不存在");
+                throw new BusinessException(ErrorCode.DATA_NOT_EXISTS);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            //req.getColumnShow().stream().
+
+        } catch (Exception e) {
+            logger.error("设置员工首页列展示异常:{}", e);
+            throw new BusinessException(ErrorCode.ERROR);
+        } finally {
+            SystemUtils.writeOperateLog(2, "设置用户id为" + req.getNumUid() +"的员工首页列展示", true, req.getNumUid());
         }
     }
 }

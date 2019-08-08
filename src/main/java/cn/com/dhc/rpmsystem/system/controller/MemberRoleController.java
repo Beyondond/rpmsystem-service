@@ -1,7 +1,7 @@
 package cn.com.dhc.rpmsystem.system.controller;
 
-import cn.com.dhc.rpmsystem.entity.Member;
 import cn.com.dhc.rpmsystem.system.dto.ColumnShowDto;
+import cn.com.dhc.rpmsystem.system.dto.ColumnShowSetUpDto;
 import cn.com.dhc.rpmsystem.system.service.IMemberRoleService;
 import cn.com.dhc.rpmsystem.utils.ResultUtils;
 import com.alibaba.fastjson.JSON;
@@ -25,13 +25,20 @@ public class MemberRoleController {
     private IMemberRoleService memberRoleServiceImpl;
 
 
-    @ApiOperation(value = "获取用户详情接口", notes = "根据员工卡号获取员工详情接口")
+    @ApiOperation(value = "获取员工首页列展示接口", notes = "获取员工首页列展示接口")
     @RequestMapping(value = "/get/column-show", method = RequestMethod.POST)
-    public String getMemberRole(@RequestBody Member req) {
+    public String getMemberRole(@RequestBody ColumnShowSetUpDto req) {
 
         ColumnShowDto columnShow = memberRoleServiceImpl.getMemberRole(req.getNumUid());
         return JSON.toJSONString(ResultUtils.success(columnShow));
     }
 
+    @ApiOperation(value = "设置员工首页列展示接口", notes = "设置员工首页列展示接口")
+    @RequestMapping(value = "/set/column-show", method = RequestMethod.POST)
+    public String setMemberRole(@RequestBody ColumnShowSetUpDto req) {
+
+        memberRoleServiceImpl.setMemberRole(req);
+        return JSON.toJSONString(ResultUtils.success());
+    }
 
 }
