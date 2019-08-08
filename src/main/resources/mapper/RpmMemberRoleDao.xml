@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhc.rpmsystem.system.dao.RpmMemberRoleMapper">
+  <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+    <result column="num_uid" jdbcType="INTEGER" property="numUid" />
+    <result column="mem_name" jdbcType="VARCHAR" property="memName" />
+    <result column="role_ids" jdbcType="VARCHAR" property="roleIds" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="column_show" jdbcType="VARCHAR" property="columnShow" />
+    <result column="created_num_uid" jdbcType="INTEGER" property="createdNumUid" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+    insert into rpm_member_role (num_uid, mem_name, role_ids, 
+      password, column_show, created_num_uid, 
+      created_time)
+    values (#{numUid,jdbcType=INTEGER}, #{memName,jdbcType=VARCHAR}, #{roleIds,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{columnShow,jdbcType=VARCHAR}, #{createdNumUid,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+    insert into rpm_member_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="numUid != null">
+        num_uid,
+      </if>
+      <if test="memName != null">
+        mem_name,
+      </if>
+      <if test="roleIds != null">
+        role_ids,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="columnShow != null">
+        column_show,
+      </if>
+      <if test="createdNumUid != null">
+        created_num_uid,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="numUid != null">
+        #{numUid,jdbcType=INTEGER},
+      </if>
+      <if test="memName != null">
+        #{memName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIds != null">
+        #{roleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="columnShow != null">
+        #{columnShow,jdbcType=VARCHAR},
+      </if>
+      <if test="createdNumUid != null">
+        #{createdNumUid,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
