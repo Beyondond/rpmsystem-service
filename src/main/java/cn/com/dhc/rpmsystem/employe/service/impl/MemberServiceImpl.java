@@ -238,7 +238,7 @@ public class MemberServiceImpl implements IMemberService {
             Map<String, Integer> result = new HashMap<>();
 
             Arrays.asList(CommonConstant.ColumnShow.values()).stream().forEach( element -> {
-               Integer value = list.contains(element.getValue()) ? 1 : 0;
+               Integer value = list.contains(element.getValue()) ? CommonConstant.SHOW : CommonConstant.NOT_SHOW;
                result.put(element.name(), value);
             });
 

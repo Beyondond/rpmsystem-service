@@ -7,6 +7,8 @@ package cn.com.dhc.rpmsystem.common;
  */
 public class CommonConstant  {
 
+    public static final Integer SHOW = 1;
+    public static final Integer NOT_SHOW = 0;
 
     /**
      * 数据状态常量
