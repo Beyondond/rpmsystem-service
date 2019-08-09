@@ -1,5 +1,7 @@
 package cn.com.dhc.rpmsystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,17 +14,17 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@ApiModel(description= "排序实体类")
 public class Order implements Serializable {
     private static final long serialVersionUID = 749118788009979542L;
 
     /**
      * 排序方式
      */
+    @ApiModelProperty(value = "排序方式")
     private String orderType;
 
-    /**
-     * 排序字段
-     */
+    @ApiModelProperty(value = "排序字段")
     private String orderField;
 
     public Order (String orderType, String orderField) {
