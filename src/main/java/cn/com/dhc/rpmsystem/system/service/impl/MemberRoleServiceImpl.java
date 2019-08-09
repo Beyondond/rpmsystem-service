@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  * @date 2019-08-08
  */
 @Service
+@Transactional
 public class MemberRoleServiceImpl implements IMemberRoleService {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberRoleServiceImpl.class);
