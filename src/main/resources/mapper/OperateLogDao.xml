@@ -38,4 +38,35 @@
         </if>
         ORDER BY operate_time DESC
     </select>
+
+
+    <select id="getTotalCount" parameterType="cn.com.dhc.rpmsystem.system.dto.OperateLogDto"
+            resultType="integer">
+        select count(0)
+        from rpm_operate_log operatelog left join rpm_member_role memberrole on memberrole.num_uid =
+        operatelog.operate_num_uid
+        where
+        1=1
+        <if test="startTime != null and endTime != null">
+            AND (operatelog.operate_time &gt;= DATE_FORMAT(#{startTime},"%Y-%m-%d %T") AND operatelog.operate_time &lt;=
+            DATE_FORMAT(#{endTime},"%Y-%m-%d %T"))
+        </if>
+        <!--根据操作对象过滤-->
+        <if test="searchType==0 and operateTarget != null and operateTarget != ''.toString()">
+            AND operatelog.skill like '%${operateTarget}%'
+        </if>
+        <!-- 根据操作工号过滤 -->
+        <if test="searchType==1">
+            AND operatelog.operate_num_uid like '%${operateAccount}%'
+        </if>
+        <!--根据操作人名字-->
+        <if test="searchType==2 and operateName != null and operateName != ''.toString()">
+            AND memberrole.mem_name like '%${operateName}%'
+        </if>
+        <!-- 根据操作结果过滤 -->
+        <if test="searchType==3">
+            AND operatelog.operate_result like '%${operateResult}%'
+        </if>
+        ORDER BY operate_time DESC
+    </select>
 </mapper>

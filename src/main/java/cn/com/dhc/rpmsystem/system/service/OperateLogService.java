@@ -18,4 +18,10 @@ public interface OperateLogService {
      */
     List<OperateLogEntity> findOperateLogs(OperateLogDto operateLogDto);
 
+    /**
+     * 获取总数
+     * @param operateLogDto
+     * @return
+     */
+    Integer getTotalCount(OperateLogDto operateLogDto);
 }

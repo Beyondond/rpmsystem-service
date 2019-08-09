@@ -28,6 +28,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.findDepartments( searchStr );
     }
 
+    @Override
+    public int getTotalCount(String searchStr) {
+        return departmentDao.getTotalCount( searchStr );
+    }
+
 
     @Override
     public int deleteDepartment(int id) {

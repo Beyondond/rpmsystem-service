@@ -19,6 +19,12 @@ public interface DepartmentService {
      */
     List<Department> findDepartments(String searchStr);
 
+    /**
+     * 查询总数
+     * @param searchStr
+     * @return
+     */
+    int getTotalCount(String searchStr);
 
     /**
      * 删除一个部门

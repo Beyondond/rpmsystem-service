@@ -23,4 +23,9 @@ public class OperateLogServiceImpl implements OperateLogService {
     public List<OperateLogEntity> findOperateLogs(OperateLogDto operateLogDto) {
         return operateLogDao.findOperateLogs( operateLogDto );
     }
+
+    @Override
+    public Integer getTotalCount(OperateLogDto operateLogDto) {
+        return operateLogDao.getTotalCount( operateLogDto );
+    }
 }
