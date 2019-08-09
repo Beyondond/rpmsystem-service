@@ -29,10 +29,10 @@ public interface RoleManagerService {
 
     /**
      *修改角色
-     * @param id
+     * @param rpmRole
      * @return
      */
-    Boolean updateRpmRole(int id);
+    Boolean updateRpmRole(RpmRole rpmRole);
 
 
     /**

@@ -1,8 +1,10 @@
 package cn.com.dhc.rpmsystem.system.controller;
 
 import cn.com.dhc.rpmsystem.entity.ResultEntity;
+import cn.com.dhc.rpmsystem.system.dto.MemberRole;
 import cn.com.dhc.rpmsystem.system.dto.RpmRoleDto;
 import cn.com.dhc.rpmsystem.system.dto.RpmSkillInfoDto;
+import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo;
 import cn.com.dhc.rpmsystem.system.service.AuthorityService;
@@ -27,16 +29,6 @@ public class AuthorityController {
     @Autowired
     private AuthorityService authorityService;
 
-    @ApiOperation("添加权限")
-    @PostMapping("/addAuthorityManager")
-    public ResultEntity addAuthorityManager(@RequestBody RpmSkillInfoDto rpmSkillInfoDto) {
-        RpmSkillInfo rpmSkillInfo = new RpmSkillInfo();
-        rpmSkillInfo.setId(rpmSkillInfoDto.getId());
-        rpmSkillInfo.setRoleId(rpmSkillInfoDto.getRoleId());
-        rpmSkillInfo.setSkillDesc(rpmSkillInfoDto.getSkillDesc());
-        authorityService.addSkillInfo(rpmSkillInfo);
-        return ResultUtils.success();
-    }
     @ApiOperation("删除权限")
     @PostMapping("/deleteAuthorityManager")
     public ResultEntity deleteAuthorityManager(@RequestParam("id")int id){
@@ -46,22 +38,29 @@ public class AuthorityController {
 
     @ApiOperation("修改权限")
     @PostMapping("/updateAuthorityManager")
-    public ResultEntity updateAuthorityManager(@RequestParam("id")int id){
-        authorityService.updateSkillInfo(id);
+    public ResultEntity updateAuthorityManager(@RequestBody MemberRole memberRole){
+        RpmRole rpmRole = new RpmRole();
+        rpmRole.setColumName(memberRole.getColumName());
+        rpmRole.setCreated_time(memberRole.getCreated_time());
+        rpmRole.setCreateNumUid(memberRole.getCreateNumUid());
+        rpmRole.setId(memberRole.getId());
+        rpmRole.setRoleName(memberRole.getRoleName());
+        rpmRole.setSkills(memberRole.getSkills());
+        authorityService.updateSkillInfo(memberRole);
         return ResultUtils.success();
     }
 
     @ApiOperation("查询单个权限")
     @PostMapping("/findAuthorityByName")
-    public ResultEntity findAuthorityByName(@RequestParam("id")int id){
-        RpmSkillInfo rpmSkillInfo = authorityService.findOneSkillInfo(id);
-        return ResultUtils.success(rpmSkillInfo);
+    public ResultEntity findAuthorityByName(String memName){
+        MemberRole memberRole = authorityService.findOneSkillInfo(memName);
+        return ResultUtils.success(memberRole);
     }
 
     @ApiOperation("查询所有权限")
     @PostMapping("/findAuthorityManager")
     public ResultEntity findRoleByName(){
-        List<RpmSkillInfo> rpmSkillInfo = authorityService.findAllSkillInfo();
+        List<MemberRole> rpmSkillInfo = authorityService.findAllSkillInfo();
         return ResultUtils.success(rpmSkillInfo);
     }
 }

@@ -57,12 +57,12 @@ public class RoleManagerServiceImpl implements RoleManagerService {
 
     /**
      *更新某个角色
-     * @param id
+     * @param rpmRole
      * @return  Boolean
      */
     @Override
-    public Boolean updateRpmRole(int id) {
-        Boolean flag = roleManagerDao.updateRpmRole(id);
+    public Boolean updateRpmRole(RpmRole rpmRole) {
+        Boolean flag = roleManagerDao.updateRpmRole(rpmRole);
         if (flag != false){
             LOGGER.debug("角色更新成功");
         }else{

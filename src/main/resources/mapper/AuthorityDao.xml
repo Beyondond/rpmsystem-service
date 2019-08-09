@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.com.dhc.rpmsystem.system.dao.AuthorityDao">
-    <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo">
+    <resultMap id="BaseResultMap" type="cn.com.dhc.rpmsystem.system.dto.MemberRole">
         <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="parent_id" jdbcType="INTEGER" property="roleId"/>
-        <result column="skill_desc" jdbcType="VARCHAR" property="skillDesc"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="skills" jdbcType="VARCHAR" property="skills"/>
+        <result column="created_num_uid" jdbcType="VARCHAR" property="createNumUid"/>
+        <result column="colum_name" jdbcType="VARCHAR" property="columName"/>
+        <result column="created_time" jdbcType="VARCHAR" property="created_time"/>
+        <result column="num_uid" jdbcType="INTEGER" property="numUid"/>
+        <result column="mem_name" jdbcType="VARCHAR" property="memName"/>
+        <result column="role_ids" jdbcType="VARCHAR" property="roleIds"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="column_show" jdbcType="VARCHAR" property="columnShow"/>
+        <result column="created_num_uid" jdbcType="VARCHAR" property="createdNumUid"/>
+        <result column="created_time" jdbcType="VARCHAR" property="createdTime"/>
     </resultMap>
-    <!-- 添加权限-->
-    <insert id = "addSkillInfo" parameterType = "cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo">
-  INSERT INTO `rpm_system`.`rpm_skill_info`(`id`, `parent_id`, `skill_desc`)
-  VALUES (#{id},#{roleId},#{skillDesc});
-    </insert>
+
     <!--删除一个权限-->
     <delete id="deleteSkillInfo" parameterType="integer">
-        DELETE FROM rpm_skill_info
+        DELETE FROM rpm_role
         WHERE id = #{id}
     </delete>
-
-    <!--编辑更新-->
-    <update id="updateSkillInfo" parameterType="integer">
-        UPDATE
-            rpm_skill_info
-        SET
-            parent_id = #{roleId},
-            skill_desc = #{skillDesc},
-        WHERE
-            id = #{id};
+    <!--编辑更新权限-->
+    <update id="updateSkillInfo"   parameterType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
+        UPDATE  rpm_role r
+        INNER JOIN  rpm_member_role m ON r.id
+        = m.role_ids AND  m.mem_name = #{memName}
+        SET r.role_name = #{roleName};
     </update>
-
-    <!-- 根据id查询权限-->
-    <select id="findAllSkillInfo" resultType="cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo">
-        SELECT
-            id AS id,
-            parent_id AS parentId,
-            skill_desc AS skillDesc
-        FROM
-            rpm_skill_info
-        WHERE
-        id IN
-        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{id}
-        </foreach>
+    <!-- 查询所有人员权限-->
+    <select id="findAllSkillInfo" resultMap="BaseResultMap"  resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
+        SELECT  id ,num_uid , mem_name, role_name
+        FROM rpm_member_role AS m
+        INNER JOIN rpm_role AS r
+        ON m.role_ids = r.id
     </select>
 
-    <!--根据相应条件查找-->
-    <select id="findOneSkillInfo" resultType="cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo">
-        SELECT
-            id AS id,
-            parent_id AS parentId,
-            skill_desc AS skillDesc
-        FROM
-            rpm_skill_info
-        where
-            id = #{id};
+    <!--根据名称查找权限-->
+    <select id="findOneSkillInfo" resultMap="BaseResultMap" resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
+        SELECT  id ,num_uid ,mem_name,role_name
+        FROM rpm_member_role AS m
+        INNER JOIN rpm_role AS r
+        ON m.role_ids = r.id
+        WHERE
+          m.mem_name = #{memName}
     </select>
 </mapper>

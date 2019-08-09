@@ -1,11 +1,14 @@
 package cn.com.dhc.rpmsystem.system.dao;
 
+import cn.com.dhc.rpmsystem.system.dto.MemberRole;
+import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 
 /**
  * @author kemeiyi
@@ -17,41 +20,31 @@ import java.util.List;
 public interface AuthorityDao {
 
     /**
-     * 增加权限
-     * @param rpmSkillInfo
-     * @return
-     */
-    Integer addSkillInfo(RpmSkillInfo rpmSkillInfo);
-
-
-    /**
      *删除权限
      * @param id
      * @return
      */
     Integer deleteSkillInfo(int id);
 
-
     /**
      *修改权限
-     * @param id
+     * @param memberRole
      * @return
      */
-    Boolean updateSkillInfo(int id);
+    Boolean updateSkillInfo(MemberRole memberRole);
 
     /**
      * 查询单个权限（根据name名称查询）
-     * @param id
+     * @param memName
      * @return
      */
 
-    RpmSkillInfo findOneSkillInfo(int id);
-
+    MemberRole findOneSkillInfo(String memName);
 
     /**
      * 查询所有权限
      * @return
      */
-    List<RpmSkillInfo> findAllSkillInfo();
+    List<MemberRole> findAllSkillInfo();
 
 }

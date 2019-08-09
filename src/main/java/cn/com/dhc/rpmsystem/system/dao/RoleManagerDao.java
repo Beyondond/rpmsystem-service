@@ -33,10 +33,10 @@ public interface RoleManagerDao {
 
     /**
      *修改角色
-     * @param id
+     * @param rpmRole
      * @return
      */
-    Boolean updateRpmRole(int id);
+    Boolean updateRpmRole(RpmRole rpmRole);
 
     /**
      * 查询单个角色（根据角色名称查询）

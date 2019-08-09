@@ -2,6 +2,8 @@ package cn.com.dhc.rpmsystem.system.service.impl;
 
 import cn.com.dhc.rpmsystem.employefilter.service.impl.EmployeFilterServiceImpl;
 import cn.com.dhc.rpmsystem.system.dao.AuthorityDao;
+import cn.com.dhc.rpmsystem.system.dto.MemberRole;
+import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmSkillInfo;
 import cn.com.dhc.rpmsystem.system.service.AuthorityService;
@@ -28,30 +30,12 @@ public class AuthorityServiceImpl implements AuthorityService{
     private AuthorityDao authorityDao;
 
     /**
-     *增加权限
-     * @param rpmSkillInfo
-     * @return  Integer
-     */
-    @Override
-    public Integer addSkillInfo(RpmSkillInfo rpmSkillInfo) {
-
-        Integer count = authorityDao.addSkillInfo(rpmSkillInfo);
-
-        if (count != 0){
-            LOGGER.debug("权限增加成功");
-        }else{
-            LOGGER.debug("权限增加失败");
-        }
-        return count;
-    }
-    /**
      *删除某个权限
      * @param id
      * @return  Integer
      */
     @Override
     public Integer deleteSkillInfo(int id) {
-
         Integer result = authorityDao.deleteSkillInfo(id);
         if (result != 0){
             LOGGER.debug("权限删除成功");
@@ -62,13 +46,12 @@ public class AuthorityServiceImpl implements AuthorityService{
     }
     /**
      *更新某个权限
-     * @param id
+     * @param memberRole
      * @return  Boolean
      */
     @Override
-    public Boolean updateSkillInfo(int id) {
-
-        Boolean flag = authorityDao.updateSkillInfo(id);
+    public Boolean updateSkillInfo(MemberRole memberRole) {
+        Boolean flag = authorityDao.updateSkillInfo(memberRole);
         if (flag != false){
             LOGGER.debug("权限更新成功");
         }else{
@@ -79,19 +62,18 @@ public class AuthorityServiceImpl implements AuthorityService{
 
     /**
      *查询某个权限
-     * @param id
+     * @param memName
      * @return  RpmSkillInfo
      */
     @Override
-    public RpmSkillInfo findOneSkillInfo(int id) {
-
-        RpmSkillInfo rpmSkillInfo= authorityDao.findOneSkillInfo(id);
-        if (rpmSkillInfo != null){
+    public MemberRole findOneSkillInfo(String memName) {
+        MemberRole memberRole = authorityDao.findOneSkillInfo(memName);
+        if (memberRole != null){
             LOGGER.debug("查询到权限");
         }else{
             LOGGER.debug("未查询到权限");
         }
-        return rpmSkillInfo;
+        return memberRole;
     }
     /**
      *查询所有权限
@@ -99,8 +81,8 @@ public class AuthorityServiceImpl implements AuthorityService{
      * @return  rpmRoleList
      */
     @Override
-    public List<RpmSkillInfo> findAllSkillInfo() {
-        List<RpmSkillInfo> rpmSkillInfoList = authorityDao.findAllSkillInfo();
+    public List<MemberRole> findAllSkillInfo() {
+        List<MemberRole> rpmSkillInfoList = authorityDao.findAllSkillInfo();
         if (!rpmSkillInfoList.isEmpty()){
             LOGGER.debug("查询到权限");
         }else{
