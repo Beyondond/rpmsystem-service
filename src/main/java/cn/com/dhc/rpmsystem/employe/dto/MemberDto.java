@@ -17,9 +17,6 @@ import lombok.Setter;
 public class MemberDto extends ReqPage {
 
 
-    /**
-     * 检索姓名
-     */
     @ApiModelProperty(value = "检索姓名")
     private String searchName;
 

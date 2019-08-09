@@ -1,10 +1,13 @@
 package cn.com.dhc.rpmsystem.common;
 
+import lombok.Getter;
+
 /**
  * 异常枚举常量
  * @author zss
  * @date 2019-08-06
  */
+@Getter
 public enum ErrorCode {
 
     ERROR("500", "系统异常"),
@@ -15,19 +18,6 @@ public enum ErrorCode {
 
     ErrorCode(String code, String msg){
         this.code = code;
-        this.msg = msg;
-    }
-
-    public String getCode() {
-        return code;
-    }
-    public void setCode(String code) {
-        this.code = code;
-    }
-    public String getMsg() {
-        return msg;
-    }
-    public void setMsg(String msg) {
         this.msg = msg;
     }
 

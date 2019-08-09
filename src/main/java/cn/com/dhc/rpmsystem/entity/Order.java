@@ -18,9 +18,6 @@ import java.io.Serializable;
 public class Order implements Serializable {
     private static final long serialVersionUID = 749118788009979542L;
 
-    /**
-     * 排序方式
-     */
     @ApiModelProperty(value = "排序方式")
     private String orderType;
 
