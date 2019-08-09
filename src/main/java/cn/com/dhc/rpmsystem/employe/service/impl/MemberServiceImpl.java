@@ -36,8 +36,6 @@ public class MemberServiceImpl implements IMemberService {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
-    private static final int DEFAULT_PAGE_SIZE = 10;
-    private static final int DEFAULT_CURRENTPAGE = 0;
 
     @Autowired
     private MemberDao memberDao;
@@ -186,12 +184,9 @@ public class MemberServiceImpl implements IMemberService {
             Integer total = memberDao.selectMemberListTotal(params);
             logger.debug("根据条件查询总记录数total:{}", total);
 
-            Integer currIndex = DEFAULT_CURRENTPAGE;
-            Integer pageSize = DEFAULT_PAGE_SIZE;
-            if (null != req.getCurrPage() && null != req.getPageSize()) {
-                currIndex = req.getCurrPage() <=1 ? 0 : (req.getCurrPage() - 1) * req.getPageSize();
-                pageSize = req.getPageSize();
-            }
+            Integer currIndex = req.getCurrPage() <=1 ? 0 : (req.getCurrPage() - 1) * req.getPageSize();
+            Integer pageSize = req.getPageSize();
+
             Order order;
             if (null == req.getOrder()) {
                 order = new Order("num_uid");

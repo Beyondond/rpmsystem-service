@@ -7,8 +7,24 @@ package cn.com.dhc.rpmsystem.common;
  */
 public class CommonConstant  {
 
+    /**
+     * 列展示
+     */
     public static final Integer SHOW = 1;
+    /**
+     * 列不展示
+     */
     public static final Integer NOT_SHOW = 0;
+
+    /**
+     * 默认每页显示条数
+     */
+    public static final int DEFAULT_PAGE_SIZE = 10;
+
+    /**
+     * 默认起始页
+     */
+    public static final int DEFAULT_CURRENTPAGE = 1;
 
     /**
      * 数据状态常量

@@ -1,5 +1,6 @@
 package cn.com.dhc.rpmsystem.entity;
 
+import cn.com.dhc.rpmsystem.common.CommonConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,10 +19,10 @@ public class ReqPage implements Serializable {
     private static final long serialVersionUID = 434634798496091234L;
 
     @ApiModelProperty(value = "查询当前页数")
-    private Integer currPage;
+    private Integer currPage = CommonConstant.DEFAULT_CURRENTPAGE;
 
     @ApiModelProperty(value = "每页显示条数")
-    private Integer pageSize;
+    private Integer pageSize = CommonConstant.DEFAULT_PAGE_SIZE;
 
     @ApiModelProperty(value = "排序条件")
     private Order order;
