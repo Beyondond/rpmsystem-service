@@ -72,7 +72,7 @@
     <if test="null != order">
       order by <![CDATA[ ${order.orderField} ${order.orderType} ]]>
     </if>
-    limit #{currIndex} , #{pageSize}
+    <include refid="Common.limit"/>
   </select>
 
   <update id="updateMemberByKey" parameterType="cn.com.dhc.rpmsystem.entity.Member">
