@@ -1,9 +1,11 @@
 package cn.com.dhc.rpmsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -48,12 +50,27 @@ public class Member implements Serializable {
     private String graSchool;
 
     @ApiModelProperty(value = "毕业时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date graTime;
 
     @ApiModelProperty(value = "入职时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date initPositionTime;
 
     @ApiModelProperty(value = "入项时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date initProjectTime;
 
     @ApiModelProperty(value = "技术类型")
@@ -87,6 +104,11 @@ public class Member implements Serializable {
     private int inputNumUid;
 
     @ApiModelProperty(value = "录入时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date inputTime;
 
     @ApiModelProperty(value = "是否在职（1在职 0离职）")
@@ -96,9 +118,19 @@ public class Member implements Serializable {
     private int status;
 
     @ApiModelProperty(value = "创建时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Timestamp createdTime;
 
     @ApiModelProperty(value = "删除时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Timestamp  deleteTime;
 
 

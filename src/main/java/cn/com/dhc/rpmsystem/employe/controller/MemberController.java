@@ -33,6 +33,7 @@ public class MemberController {
     public String getMember(@RequestBody Member req) {
 
         Member member = memberServiceImpl.getMember(req.getNumUid());
+        //阿里 JSON处理返回的数据会讲时间自动转为时间戳    com.fasterxml.jackson.annotation @JsonFormat注解也不会起作用
         return JSON.toJSONString(ResultUtils.success(member));
     }
 
