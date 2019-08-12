@@ -24,21 +24,21 @@ public interface AuthorityDao {
      * @param rpmMemberRole
      * @return
      */
-    Integer addAuthority(RpmMemberRole rpmMemberRole);
+    Integer addAuthority(RpmMemberRole rpmMemberRole) throws Exception;
 
     /**
      *删除权限
      * @param numUid
      * @return
      */
-    Integer deleteAuthority(Integer numUid);
+    Integer deleteAuthority(Integer numUid) throws Exception;
 
     /**
      *修改权限
      * @param rpmMemberRole
      * @return
      */
-    Boolean updateAuthority(RpmMemberRole rpmMemberRole);
+    Boolean updateAuthority(RpmMemberRole rpmMemberRole) throws Exception;
 
     /**
      * 查询单个权限（根据name名称查询）
@@ -46,12 +46,12 @@ public interface AuthorityDao {
      * @return
      */
 
-    MemberRole findOneAuthority(String memName);
+    MemberRole findOneAuthority(String memName) throws Exception;
 
     /**
      * 查询所有权限
      * @return
      */
-    List<MemberRole> findAllAuthoritys();
+    List<MemberRole> findAllAuthoritys() throws Exception;
 
 }

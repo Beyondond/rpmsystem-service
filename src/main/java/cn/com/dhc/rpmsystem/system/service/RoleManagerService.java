@@ -1,5 +1,6 @@
 package cn.com.dhc.rpmsystem.system.service;
 
+import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface RoleManagerService {
      * @param rpmRole
      * @return
      */
-    int addRole(RpmRole rpmRole);
+    int addRole(RpmRole rpmRole) throws BusinessException;
 
 
     /**
@@ -24,7 +25,7 @@ public interface RoleManagerService {
      * @param id
      * @return
      */
-    int deleteRoleByName(int id);
+    int deleteRoleByName(int id) throws BusinessException;
 
 
     /**
@@ -32,19 +33,19 @@ public interface RoleManagerService {
      * @param rpmRole
      * @return
      */
-    Boolean updateRpmRole(RpmRole rpmRole);
+    Boolean updateRpmRole(RpmRole rpmRole) throws BusinessException;
 
 
     /**
      * 查询所有的角色
      * @return
      */
-    List<RpmRole> findAllRole();
+    List<RpmRole> findAllRole() throws BusinessException;
 
     /**
      * 根据角色名称查询
      * @param roleName
      * @return
      */
-    RpmRole findRoleByName(String roleName);
+    RpmRole findRoleByName(String roleName) throws BusinessException;
 }

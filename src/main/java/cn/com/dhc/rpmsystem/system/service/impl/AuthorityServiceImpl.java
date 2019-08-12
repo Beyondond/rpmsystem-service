@@ -1,6 +1,7 @@
 package cn.com.dhc.rpmsystem.system.service.impl;
 
 import cn.com.dhc.rpmsystem.employefilter.service.impl.EmployeFilterServiceImpl;
+import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.system.dao.AuthorityDao;
 import cn.com.dhc.rpmsystem.system.dto.MemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author zhouyongzhou
+ * @author kemeiyi
  * @description
  * @date 2019/8/5
  */
@@ -28,8 +29,13 @@ public class AuthorityServiceImpl implements AuthorityService{
     private AuthorityDao authorityDao;
 
     @Override
-    public Integer addAuthority(RpmMemberRole rpmMemberRole) {
-        Integer result = authorityDao.addAuthority(rpmMemberRole);
+    public Integer addAuthority(RpmMemberRole rpmMemberRole) throws BusinessException {
+        Integer result = null;
+        try {
+            result = authorityDao.addAuthority(rpmMemberRole);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (result != 0){
             LOGGER.debug("新增权限成功");
         }else{
@@ -39,19 +45,29 @@ public class AuthorityServiceImpl implements AuthorityService{
     }
 
     @Override
-    public Integer deleteAuthority(Integer numUid) {
-        Integer count = authorityDao.deleteAuthority(numUid);
-        if (count != 0){
-            LOGGER.debug("删除权限成功");
-        }else{
-            LOGGER.debug("删除权限失败");
+    public Integer deleteAuthority(Integer numUid) throws BusinessException{
+        Integer count = null;
+        try {
+            count = authorityDao.deleteAuthority(numUid);
+            if (count != 0){
+                LOGGER.debug("删除权限成功");
+            }else{
+                LOGGER.debug("删除权限失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return count;
     }
 
     @Override
-    public Boolean updateAuthority(RpmMemberRole rpmMemberRole) {
-        Boolean flag = authorityDao.updateAuthority(rpmMemberRole);
+    public Boolean updateAuthority(RpmMemberRole rpmMemberRole) throws BusinessException{
+        Boolean flag = false;
+        try {
+            flag = authorityDao.updateAuthority(rpmMemberRole);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (flag != false){
             LOGGER.debug("更新权限成功");
         }else{
@@ -61,8 +77,13 @@ public class AuthorityServiceImpl implements AuthorityService{
     }
 
     @Override
-    public MemberRole findOneAuthority(String memName) {
-        MemberRole memberRole = authorityDao.findOneAuthority(memName);
+    public MemberRole findOneAuthority(String memName) throws BusinessException {
+        MemberRole memberRole = null;
+        try {
+            memberRole = authorityDao.findOneAuthority(memName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (memberRole != null){
             LOGGER.debug("已查到任何权限信息");
         }else{
@@ -72,8 +93,13 @@ public class AuthorityServiceImpl implements AuthorityService{
     }
 
     @Override
-    public List<MemberRole> findAllAuthoritys() {
-        List<MemberRole>  memberRoleList  = authorityDao.findAllAuthoritys();
+    public List<MemberRole> findAllAuthoritys() throws BusinessException {
+        List<MemberRole>  memberRoleList  = null;
+        try {
+            memberRoleList = authorityDao.findAllAuthoritys();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (!memberRoleList.isEmpty()){
             LOGGER.debug("已查到所有权限信息");
         }else{

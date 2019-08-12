@@ -1,6 +1,7 @@
 package cn.com.dhc.rpmsystem.system.service.impl;
 
 import cn.com.dhc.rpmsystem.employefilter.service.impl.EmployeFilterServiceImpl;
+import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.system.dao.RoleManagerDao;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
 import cn.com.dhc.rpmsystem.system.service.RoleManagerService;
@@ -30,8 +31,13 @@ public class RoleManagerServiceImpl implements RoleManagerService {
      * @return  Integer
      */
     @Override
-    public int addRole(RpmRole rpmRole) {
-        Integer count =  roleManagerDao.addRpmRole(rpmRole);
+    public int addRole(RpmRole rpmRole) throws BusinessException {
+        Integer count = null;
+        try {
+            count = roleManagerDao.addRpmRole(rpmRole);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (count != 0){
             LOGGER.debug("角色增加成功");
         }else{
@@ -45,8 +51,13 @@ public class RoleManagerServiceImpl implements RoleManagerService {
      * @return  Integer
      */
     @Override
-    public int deleteRoleByName(int id) {
-        Integer result = roleManagerDao.deleteRpmRole(id);
+    public int deleteRoleByName(int id) throws BusinessException {
+        Integer result = null;
+        try {
+            result = roleManagerDao.deleteRpmRole(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (result != 0){
             LOGGER.debug("角色删除成功");
         }else{
@@ -61,8 +72,13 @@ public class RoleManagerServiceImpl implements RoleManagerService {
      * @return  Boolean
      */
     @Override
-    public Boolean updateRpmRole(RpmRole rpmRole) {
-        Boolean flag = roleManagerDao.updateRpmRole(rpmRole);
+    public Boolean updateRpmRole(RpmRole rpmRole) throws BusinessException {
+        Boolean flag = null;
+        try {
+            flag = roleManagerDao.updateRpmRole(rpmRole);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (flag != false){
             LOGGER.debug("角色更新成功");
         }else{
@@ -76,8 +92,13 @@ public class RoleManagerServiceImpl implements RoleManagerService {
      * @return  rpmRoleList
      */
     @Override
-    public List<RpmRole> findAllRole() {
-        List<RpmRole> rpmRoleList = roleManagerDao.findAllRpmRole();
+    public List<RpmRole> findAllRole() throws BusinessException{
+        List<RpmRole> rpmRoleList = null;
+        try {
+            rpmRoleList = roleManagerDao.findAllRpmRole();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (!rpmRoleList.isEmpty()){
             LOGGER.debug("查询到角色");
         }else{
@@ -92,8 +113,13 @@ public class RoleManagerServiceImpl implements RoleManagerService {
      * @return  RpmRole
      */
     @Override
-    public RpmRole findRoleByName(String roleName) {
-        RpmRole rpmRole = roleManagerDao.findOneRpmRole(roleName);
+    public RpmRole findRoleByName(String roleName) throws BusinessException{
+        RpmRole rpmRole = null;
+        try {
+            rpmRole = roleManagerDao.findOneRpmRole(roleName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (rpmRole != null){
             LOGGER.debug("查询到角色");
         }else{

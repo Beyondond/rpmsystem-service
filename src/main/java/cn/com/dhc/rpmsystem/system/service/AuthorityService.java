@@ -1,5 +1,6 @@
 package cn.com.dhc.rpmsystem.system.service;
 
+import cn.com.dhc.rpmsystem.exception.BusinessException;
 import cn.com.dhc.rpmsystem.system.dto.MemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmMemberRole;
 import cn.com.dhc.rpmsystem.system.entity.RpmRole;
@@ -20,21 +21,21 @@ public interface AuthorityService {
      * @param rpmMemberRole
      * @return
      */
-    Integer addAuthority(RpmMemberRole rpmMemberRole);
+    Integer addAuthority(RpmMemberRole rpmMemberRole) throws BusinessException;
 
     /**
      *删除权限
      * @param numUid
      * @return
      */
-    Integer deleteAuthority(Integer numUid);
+    Integer deleteAuthority(Integer numUid) throws BusinessException;
 
     /**
      *修改权限
      * @param rpmMemberRole
      * @return
      */
-    Boolean updateAuthority(RpmMemberRole rpmMemberRole);
+    Boolean updateAuthority(RpmMemberRole rpmMemberRole) throws BusinessException;
 
     /**
      * 查询单个权限（根据name名称查询）
@@ -42,12 +43,12 @@ public interface AuthorityService {
      * @return
      */
 
-    MemberRole findOneAuthority(String memName);
+    MemberRole findOneAuthority(String memName) throws BusinessException;
 
     /**
      * 查询所有权限
      * @return
      */
-    List<MemberRole> findAllAuthoritys();
+    List<MemberRole> findAllAuthoritys() throws BusinessException;
 
 }

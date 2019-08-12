@@ -20,7 +20,7 @@ public interface RoleManagerDao {
      * @param rpmRole
      * @return
      */
-    Integer addRpmRole(RpmRole rpmRole);
+    Integer addRpmRole(RpmRole rpmRole) throws Exception;
 
 
     /**
@@ -28,7 +28,7 @@ public interface RoleManagerDao {
      * @param id
      * @return
      */
-    Integer deleteRpmRole(int id);
+    Integer deleteRpmRole(int id) throws Exception;
 
 
     /**
@@ -36,7 +36,7 @@ public interface RoleManagerDao {
      * @param rpmRole
      * @return
      */
-    Boolean updateRpmRole(RpmRole rpmRole);
+    Boolean updateRpmRole(RpmRole rpmRole) throws Exception;
 
     /**
      * 查询单个角色（根据角色名称查询）
@@ -44,13 +44,13 @@ public interface RoleManagerDao {
      * @return
      */
 
-    RpmRole findOneRpmRole(String roleName);
+    RpmRole findOneRpmRole(String roleName) throws Exception;
 
 
     /**
      * 查询所有角色
      * @return
      */
-    List<RpmRole> findAllRpmRole();
+    List<RpmRole> findAllRpmRole() throws Exception;
 
 }
