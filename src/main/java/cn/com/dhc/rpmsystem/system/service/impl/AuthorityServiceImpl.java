@@ -24,70 +24,61 @@ public class AuthorityServiceImpl implements AuthorityService{
 
     // 日志记录器
     private final Logger LOGGER = LoggerFactory.getLogger(EmployeFilterServiceImpl.class);
-
-
     @Autowired
     private AuthorityDao authorityDao;
 
-    /**
-     *删除某个权限
-     * @param id
-     * @return  Integer
-     */
     @Override
-    public Integer deleteSkillInfo(int id) {
-        Integer result = authorityDao.deleteSkillInfo(id);
+    public Integer addAuthority(RpmMemberRole rpmMemberRole) {
+        Integer result = authorityDao.addAuthority(rpmMemberRole);
         if (result != 0){
-            LOGGER.debug("权限删除成功");
+            LOGGER.debug("新增权限成功");
         }else{
-            LOGGER.debug("权限删除失败");
+            LOGGER.debug("新增权限失败");
         }
         return result;
     }
-    /**
-     *更新某个权限
-     * @param memberRole
-     * @return  Boolean
-     */
+
     @Override
-    public Boolean updateSkillInfo(MemberRole memberRole) {
-        Boolean flag = authorityDao.updateSkillInfo(memberRole);
-        if (flag != false){
-            LOGGER.debug("权限更新成功");
+    public Integer deleteAuthority(Integer numUid) {
+        Integer count = authorityDao.deleteAuthority(numUid);
+        if (count != 0){
+            LOGGER.debug("删除权限成功");
         }else{
-            LOGGER.debug("权限更新失败");
+            LOGGER.debug("删除权限失败");
+        }
+        return count;
+    }
+
+    @Override
+    public Boolean updateAuthority(RpmMemberRole rpmMemberRole) {
+        Boolean flag = authorityDao.updateAuthority(rpmMemberRole);
+        if (flag != false){
+            LOGGER.debug("更新权限成功");
+        }else{
+            LOGGER.debug("更新权限失败");
         }
         return flag;
     }
 
-    /**
-     *查询某个权限
-     * @param memName
-     * @return  RpmSkillInfo
-     */
     @Override
-    public MemberRole findOneSkillInfo(String memName) {
-        MemberRole memberRole = authorityDao.findOneSkillInfo(memName);
+    public MemberRole findOneAuthority(String memName) {
+        MemberRole memberRole = authorityDao.findOneAuthority(memName);
         if (memberRole != null){
-            LOGGER.debug("查询到权限");
+            LOGGER.debug("已查到任何权限信息");
         }else{
-            LOGGER.debug("未查询到权限");
+            LOGGER.debug("未查到任何权限信息");
         }
         return memberRole;
     }
-    /**
-     *查询所有权限
-     * @param
-     * @return  rpmRoleList
-     */
+
     @Override
-    public List<MemberRole> findAllSkillInfo() {
-        List<MemberRole> rpmSkillInfoList = authorityDao.findAllSkillInfo();
-        if (!rpmSkillInfoList.isEmpty()){
-            LOGGER.debug("查询到权限");
+    public List<MemberRole> findAllAuthoritys() {
+        List<MemberRole>  memberRoleList  = authorityDao.findAllAuthoritys();
+        if (!memberRoleList.isEmpty()){
+            LOGGER.debug("已查到所有权限信息");
         }else{
-            LOGGER.debug("未查询到权限");
+            LOGGER.debug("未查到任何权限信息");
         }
-        return rpmSkillInfoList;
+        return memberRoleList;
     }
 }

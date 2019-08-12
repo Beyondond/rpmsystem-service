@@ -20,18 +20,25 @@ import java.util.List;
 public interface AuthorityDao {
 
     /**
-     *删除权限
-     * @param id
+     *新增权限
+     * @param rpmMemberRole
      * @return
      */
-    Integer deleteSkillInfo(int id);
+    Integer addAuthority(RpmMemberRole rpmMemberRole);
+
+    /**
+     *删除权限
+     * @param numUid
+     * @return
+     */
+    Integer deleteAuthority(Integer numUid);
 
     /**
      *修改权限
-     * @param memberRole
+     * @param rpmMemberRole
      * @return
      */
-    Boolean updateSkillInfo(MemberRole memberRole);
+    Boolean updateAuthority(RpmMemberRole rpmMemberRole);
 
     /**
      * 查询单个权限（根据name名称查询）
@@ -39,12 +46,12 @@ public interface AuthorityDao {
      * @return
      */
 
-    MemberRole findOneSkillInfo(String memName);
+    MemberRole findOneAuthority(String memName);
 
     /**
      * 查询所有权限
      * @return
      */
-    List<MemberRole> findAllSkillInfo();
+    List<MemberRole> findAllAuthoritys();
 
 }

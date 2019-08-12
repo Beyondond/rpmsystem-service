@@ -17,20 +17,24 @@
         <result column="created_time" jdbcType="VARCHAR" property="createdTime"/>
     </resultMap>
 
+   <insert id="addAuthority"  parameterType = "cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+       INSERT INTO `rpm_system`.`rpm_member_role`(`num_uid`, `mem_name`, `role_ids`, `password`, `column_show`, `created_num_uid`, `created_time`)
+       VALUES (#{numUid}, #{memName}, #{roleIds}, #{password}, #{columnShow}, #{createdNumUid}, #{createdTime});
+   </insert>
     <!--删除一个权限-->
-    <delete id="deleteSkillInfo" parameterType="integer">
-        DELETE FROM rpm_role
-        WHERE id = #{id}
-    </delete>
+    <delete id="deleteAuthority" parameterType="integer">
+        DELETE FROM `rpm_system`.`rpm_member_role`
+        WHERE `num_uid` = #{numUid}
+</delete>
     <!--编辑更新权限-->
-    <update id="updateSkillInfo"   parameterType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
-        UPDATE  rpm_role r
-        INNER JOIN  rpm_member_role m ON r.id
-        = m.role_ids AND  m.mem_name = #{memName}
-        SET r.role_name = #{roleName};
+    <update id="updateAuthority"   parameterType="cn.com.dhc.rpmsystem.system.entity.RpmMemberRole">
+        UPDATE `rpm_system`.`rpm_member_role`
+        SET `mem_name` = #{memName}, `role_ids` = #{roleIds}, `password` = #{password},
+        `column_show` = #{columnShow}, `created_num_uid` = #{createdNumUid}, `created_time` = #{createdTime}
+        WHERE `mem_name` = #{memName};
     </update>
     <!-- 查询所有人员权限-->
-    <select id="findAllSkillInfo" resultMap="BaseResultMap"  resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
+    <select id="findAllAuthoritys" resultMap="BaseResultMap"  resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
         SELECT  id ,num_uid , mem_name, role_name
         FROM rpm_member_role AS m
         INNER JOIN rpm_role AS r
@@ -38,7 +42,7 @@
     </select>
 
     <!--根据名称查找权限-->
-    <select id="findOneSkillInfo" resultMap="BaseResultMap" resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
+    <select id="findOneAuthority" resultMap="BaseResultMap" resultType="cn.com.dhc.rpmsystem.system.dto.MemberRole">
         SELECT  id ,num_uid ,mem_name,role_name
         FROM rpm_member_role AS m
         INNER JOIN rpm_role AS r

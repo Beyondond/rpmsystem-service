@@ -16,7 +16,6 @@ public class MemberRole {
     private int id;
     private String roleName;
     private String skills;
-    private String createNumUid;
     private String columName;
     private Date created_time;
     private int numUid;
@@ -24,6 +23,6 @@ public class MemberRole {
     private String roleIds;
     private String password;
     private String columnShow;
-    private String createdNumUid;
+    private Integer createdNumUid;
     private Date createdTime;
 }
